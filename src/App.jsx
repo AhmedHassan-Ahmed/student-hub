@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import "./App.css";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div>
-      <Sidebar />
-    </div>
+    <Routes>
+      <Route path="/" element={<Sidebar />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
