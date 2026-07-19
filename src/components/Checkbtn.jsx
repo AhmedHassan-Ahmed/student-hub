@@ -1,5 +1,4 @@
 import { FaCheck } from "react-icons/fa";
-import { resources } from "../data/resourceData";
 
 function Checkbtn({ onCheck, isDone }) {
     return (
