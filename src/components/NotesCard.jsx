@@ -1,10 +1,9 @@
 import { FaEllipsisV, FaThumbtack } from "react-icons/fa";
-import NotePopup from "./NotePopup";
 
-function NotesCard({ notes = [] }) {
+function NotesCard({ notes = [], children }) {
   return (
     <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      <NotePopup />
+      {children}
 
       {notes.map((note) => (
         <div
@@ -21,9 +20,7 @@ function NotesCard({ notes = [] }) {
 
           <div className="flex items-start justify-between">
             <div>
-              {note.pinned && (
-                <FaThumbtack className="mb-2 text-blue-600" />
-              )}
+              {note.pinned && <FaThumbtack className="mb-2 text-blue-600" />}
 
               <h2 className="line-clamp-3 font-serif text-3xl font-bold text-gray-900">
                 {note.title}
@@ -35,9 +32,7 @@ function NotesCard({ notes = [] }) {
             </button>
           </div>
 
-          <p className="mt-4 line-clamp-5 text-gray-600">
-            {note.content}
-          </p>
+          <p className="mt-4 line-clamp-5 text-gray-600">{note.content}</p>
 
           <div className="mt-5 flex flex-wrap gap-2">
             {note.tags.map((tag) => (
@@ -52,10 +47,6 @@ function NotesCard({ notes = [] }) {
 
           <div className="mt-auto flex items-center justify-between border-t pt-4 text-sm text-gray-500">
             <span>{note.date}</span>
-
-            <button className="text-gray-400 hover:text-black">
-              <FaEllipsisV />
-            </button>
           </div>
         </div>
       ))}

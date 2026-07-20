@@ -1,10 +1,5 @@
-import { useRef } from "react";
 
-function NotePopup() {
-  const dialogRef = useRef();
-
-  const open = () => dialogRef.current.showModal();
-  const close = () => dialogRef.current.close();
+function NotePopup({handlesubmit, dialogRef,open,close}) {
 
   return (
     <>
@@ -28,7 +23,7 @@ function NotePopup() {
         <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-6">
           <h2 className="mb-6 text-xl font-bold sm:text-2xl">Add Study Note</h2>
 
-          <form>
+          <form onSubmit={handlesubmit}>
             <div className="relative mb-5">
               <input
                 type="text"
