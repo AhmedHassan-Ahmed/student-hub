@@ -4,7 +4,7 @@ import Checkbtn from "./Checkbtn";
 
 function ResourceCard({ resource, onDelete, onCheck }) {
     return (
-        <div className="w-full border border-primary rounded-lg shadow-lg hover:shadow-2xl transition-all duration-1000 ease-in-out ">
+        <div className=" m-1 w-full border border-primary rounded-lg shadow-lg hover:shadow-2xl transition-all duration-1000 ease-in-out ">
             <div className="relative group overflow-hidden rounded-t-lg">
 
                 <img src={resource.image} alt={resource.title}
@@ -20,7 +20,7 @@ function ResourceCard({ resource, onDelete, onCheck }) {
                 </div>
 
                 <div className={`flex text-black absolute top-0 right-0 m-3 gap-3 rounded-full transition-all duration-500
-  ${resource.done ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                    ${resource.done ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
                     <Deletebtn onDelete={() => onDelete(resource.id)} />
                     <Checkbtn onCheck={() => onCheck(resource.id)}
                         isDone={resource.done} />
@@ -34,7 +34,7 @@ function ResourceCard({ resource, onDelete, onCheck }) {
             <div>
                 <button className="resource_btn my-2 mx-4 float-right cursor-pointer text-primary
                 transition-all duration-1000 ease-in-out "
-                ><a href={resource.link} target="_black">Explore Now</a></button>
+                ><a href={resource.link} target="_blank">Explore Now</a></button>
             </div>
 
         </div>
