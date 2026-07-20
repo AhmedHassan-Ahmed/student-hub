@@ -1,155 +1,135 @@
 import Button from "../components/Button";
 import { Plus } from "lucide-react";
 
-const TaskPopup = ({open,close ,dialogRef, handleSubmit}) => {
-
-
-
-
+const TaskPopup = ({ open, close, dialogRef, handleSubmit }) => {
   return (
     <>
       <Button onclick={open}>
-        <Plus className="w-4 h-4" />
+        <Plus className="h-4 w-4" />
         Create Task
       </Button>
 
       <dialog
         ref={dialogRef}
-        className="m-auto w-full max-w-lg rounded-lg p-0 shadow-xl backdrop:bg-black/50 "
+        className="m-auto w-[95%] max-w-lg rounded-xl p-0 shadow-2xl backdrop:bg-black/50"
       >
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div className="mb-6 flex justify-between items-center">
-            <h2 className="text-xl font-semibold ">Create Task</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="max-h-[90vh] overflow-y-auto p-5 sm:p-6"
+        >
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-xl font-semibold sm:text-2xl">Create Task</h2>
 
             <button
               type="button"
               onClick={close}
-              className="text-gray-500 hover:text-black text-xl"
+              className="text-2xl text-gray-500 transition hover:text-black"
             >
-              x
+              ×
             </button>
           </div>
 
-          <div>
-            <div className="relative">
-              <input
+          <div className="relative mb-5">
+            <input
               required
-                id="title"
-                name="title"
-                type="text"
-                placeholder=" "
-                className="peer w-full rounded-md border border-gray-300 px-3 pt-6 pb-2 outline-none transition
-               focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 "
-              />
+              id="title"
+              name="title"
+              type="text"
+              placeholder=" "
+              className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none"
+            />
 
-              <label
-                htmlFor="title"
-                className="absolute left-3 top-5 text-gray-500 transition-all duration-200
-               peer-placeholder-shown:top-5
-               peer-placeholder-shown:text-sm
-               peer-focus:top-2
-               peer-focus:text-[11px]
-               peer-focus:font-semibold
-               peer-focus:text-blue-600
-               peer-[:not(:placeholder-shown)]:top-2
-               peer-[:not(:placeholder-shown)]:text-[11px]
-               peer-[:not(:placeholder-shown)]:font-semibold
-               peer-[:not(:placeholder-shown)]:text-blue-600"
-              >
-                Task Title
-              </label>
-            </div>
+            <label
+              htmlFor="title"
+              className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+              peer-placeholder-shown:top-3
+              peer-placeholder-shown:text-base
+              peer-focus:-top-2
+              peer-focus:text-xs
+              peer-focus:text-blue-600
+              peer-not-placeholder-shown:-top-2
+              peer-not-placeholder-shown:text-xs"
+            >
+              Task Title
+            </label>
           </div>
 
-          <div>
-            <div className="relative">
-              <textarea
+          <div className="relative mb-5">
+            <textarea
               required
-                id="description"
-                name="description"
-                rows="4"
-                placeholder=" "
-                className="peer w-full resize-y rounded-md border border-gray-300 px-3 pt-6 pb-2 outline-none transition
-      focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
-              />
+              id="description"
+              name="description"
+              rows="5"
+              placeholder=" "
+              className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none"
+            />
 
-              <label
-                htmlFor="description"
-                className="absolute left-3 top-5 bg-white px-1 text-gray-500 transition-all duration-200
-      peer-placeholder-shown:top-5
-      peer-placeholder-shown:text-sm
-      peer-focus:top-2
-      peer-focus:text-[11px]
-      peer-focus:font-semibold
-      peer-focus:text-blue-600
-      peer-[:not(:placeholder-shown)]:top-2
-      peer-[:not(:placeholder-shown)]:text-[11px]
-      peer-[:not(:placeholder-shown)]:font-semibold
-      peer-[:not(:placeholder-shown)]:text-blue-600"
-              >
-                Description
-              </label>
-            </div>
+            <label
+              htmlFor="description"
+              className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+              peer-placeholder-shown:top-3
+              peer-placeholder-shown:text-base
+              peer-focus:-top-2
+              peer-focus:text-xs
+              peer-focus:text-blue-600
+              peer-not-placeholder-shown:-top-2
+              peer-not-placeholder-shown:text-xs"
+            >
+              Description
+            </label>
           </div>
 
-          <div>
-            <div className="relative">
-              <input
+          <div className="relative mb-5">
+            <input
               required
-                id="dueDate"
-                name="dueDate"
-                type="date"
-                placeholder=" "
-                className="peer w-full rounded-md border border-gray-300 px-3 pt-6 pb-2 outline-none transition
-      focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
-              />
+              id="dueDate"
+              name="dueDate"
+              type="date"
+              className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10"
+            />
 
-              <label
-                htmlFor="dueDate"
-                className="absolute left-3 top-2 bg-white px-1 text-[11px] font-semibold text-blue-600"
-              >
-                Due Date
-              </label>
-            </div>
+            <label
+              htmlFor="dueDate"
+              className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600"
+            >
+              Due Date
+            </label>
           </div>
 
-          <div>
-            <div className="relative">
-              <select
+          <div className="relative mb-6">
+            <select
               required
-                id="priority"
-                name="priority"
-                defaultValue=""
-                className="peer w-full rounded-md border border-gray-300 px-3 pt-6 pb-2 outline-none transition
-      focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
-              >
-                <option value="" disabled hidden></option>
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-              </select>
+              id="priority"
+              name="priority"
+              defaultValue=""
+              className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10"
+            >
+              <option value="" disabled hidden></option>
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
 
-              <label
-                htmlFor="priority"
-                className="absolute left-3 top-2 bg-white px-1 text-[11px] font-semibold text-blue-600"
-              >
-                Priority
-              </label>
-            </div>
+            <label
+              htmlFor="priority"
+              className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600"
+            >
+              Priority
+            </label>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
             <button
               type="button"
               onClick={close}
-              className="border border-gray-300 px-4 py-2 rounded"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 transition hover:bg-gray-100 sm:w-auto"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
+              className="w-full rounded-lg bg-blue-700 px-4 py-2 text-white transition hover:bg-blue-800 sm:w-auto"
             >
               Save Task
             </button>

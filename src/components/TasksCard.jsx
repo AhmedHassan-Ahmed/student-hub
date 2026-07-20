@@ -66,11 +66,11 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
   });
 
   return (
-    <div className="space-y-8 p-8">
-      <div className="grid grid-cols-4 gap-5">
-        <div className="col-span-3 rounded-xl border bg-white p-6 shadow-sm">
-          <div className="flex items-end gap-4">
-            <div className="flex-1">
+    <div className="space-y-8 p-4 sm:p-6 lg:p-8">
+      <div className="grid gap-5 lg:grid-cols-4">
+        <div className="rounded-xl border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
                 Status
               </p>
@@ -86,7 +86,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
               </select>
             </div>
 
-            <div className="flex-1">
+            <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
                 Priority
               </p>
@@ -103,15 +103,15 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
               </select>
             </div>
 
-            <div className="flex-1">
+            <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
                 Due Date
               </p>
 
               <select
+                className="focus:outline-0 w-full rounded border p-3"
                 value={dayFilter}
                 onChange={(e) => setDayFilter(e.target.value)}
-                className="focus:outline-0 w-full rounded border p-3"
               >
                 <option value="All">All Dates</option>
                 <option value="1">1 Day</option>
@@ -121,9 +121,11 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
               </select>
             </div>
 
-            <button className="rounded bg-black p-3 text-white">
-              <FaFilter />
-            </button>
+            <div className="flex items-end">
+              <button className="flex h-12 w-full items-center justify-center rounded bg-black text-white hover:bg-gray-800">
+                <FaFilter />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -134,12 +136,10 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
           </div>
 
           <div className="mt-4 h-2 rounded-full bg-slate-700">
-            <div className="h-2 w-full rounded-full bg-gray-300">
-              <div
-                className="h-2 rounded-full bg-blue-500"
-                style={{ width: `${completionRate}%` }}
-              ></div>
-            </div>
+            <div
+              className="h-2 rounded-full bg-blue-500"
+              style={{ width: `${completionRate}%` }}
+            />
           </div>
 
           <p className="mt-6 italic text-slate-400">
@@ -147,20 +147,15 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
           </p>
         </div>
       </div>
-
-      <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-xl border bg-white shadow-sm">
+        <table className="min-w-[850px] w-full">
           <thead className="border-b bg-gray-50 text-left text-xs uppercase tracking-widest text-gray-500">
             <tr>
               <th className="px-6 py-4">Title & Description</th>
-
-              <th>Priority</th>
-
-              <th>Status</th>
-
-              <th>Due Date</th>
-
-              <th className="text-center">Actions</th>
+              <th className="px-4 py-4">Priority</th>
+              <th className="px-4 py-4">Status</th>
+              <th className="px-4 py-4">Due Date</th>
+              <th className="px-4 py-4 text-center">Actions</th>
             </tr>
           </thead>
 
@@ -173,61 +168,60 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
               </tr>
             ) : (
               filteredTasks.map((task, index) => (
-                <tr key={index} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-6">
+                <tr
+                  key={index}
+                  className="border-b transition hover:bg-gray-50"
+                >
+                  <td className="px-6 py-5">
                     <div className="flex gap-4">
                       <input
                         type="checkbox"
                         readOnly
                         checked={task.completed}
                         className="mt-1 h-4 w-4"
-                        onClick={() => {
-                          handleclick(task.id);
-                        }}
+                        onClick={() => handleclick(task.id)}
                       />
 
                       <div>
                         <h3
-                          className={`font-semibold ${
+                          className={`text-sm font-semibold sm:text-base ${
                             task.completed && "line-through text-gray-400"
                           }`}
                         >
                           {task.title}
                         </h3>
 
-                        <p className="mt-1 text-gray-500">{task.description}</p>
+                        <p className="mt-1 line-clamp-2 text-sm text-gray-500">
+                          {task.description}
+                        </p>
                       </div>
                     </div>
                   </td>
 
-                  <td>
+                  <td className="px-4">
                     <span
-                      className={`rounded border px-3 py-1 text-xs font-semibold uppercase ${
-                        badgeColors[task.priority]
-                      }`}
+                      className={`rounded border px-3 py-1 text-xs font-semibold uppercase ${badgeColors[task.priority]}`}
                     >
                       {task.priority}
                     </span>
                   </td>
 
-                  <td>
+                  <td className="px-4">
                     <div className="flex items-center gap-2 text-sm font-medium uppercase">
                       <span
-                        className={`h-2 w-2 rounded-full ${
-                          statusDot[task.status]
-                        }`}
+                        className={`h-2 w-2 rounded-full ${statusDot[task.status]}`}
                       ></span>
 
                       {task.status}
                     </div>
                   </td>
 
-                  <td className="text-gray-600">{task.dueDate}</td>
+                  <td className="px-4 text-gray-600">{task.dueDate}</td>
 
-                  <td className="text-center">
-                    <div className="relative">
+                  <td className="px-4 text-center">
+                    <div className="relative inline-block">
                       <button
-                        className="text-gray-500 hover:text-black"
+                        className="text-gray-500 transition hover:text-black"
                         onClick={() =>
                           setOpenMenu(openMenu === task.id ? null : task.id)
                         }
@@ -236,7 +230,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                       </button>
 
                       {openMenu === task.id && (
-                        <div className="absolute right-0 mt-2 w-32 rounded-lg border bg-white shadow-lg">
+                        <div className="absolute right-0 z-10 mt-2 w-32 rounded-lg border bg-white shadow-lg">
                           <button
                             onClick={() => {
                               handleDelete(task.id);
