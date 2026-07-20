@@ -1,10 +1,12 @@
 import Button from "../components/Button";
 import { Download } from "lucide-react";
 import TaskPopup from "../components/TaskPopup";
-import TasksCard from "./TasksCard";
+import TasksCard from "../components/TasksCard";
 import { useRef } from "react";
 import exportCSV from "../functions/exportCSV";
 import { useState } from "react";
+import PageHeader from "../components/PageMainHeader";
+import PageMainHeader from "../components/PageMainHeader";
 export default function Tasks() {
   const dialogRef = useRef();
   const tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
@@ -47,42 +49,24 @@ export default function Tasks() {
 
   return (
     <>
-      <div className="bg-white border-b border-gray-200 px-8 py-5">
-        <div className="flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">
-          <a href="#" className="hover:text-gray-700">
-            Dashboard
-          </a>
-          <span className="mx-2 text-gray-400">/</span>
-          <a href="#" className="text-blue-600 hover:text-blue-700">
-            My Tasks
-          </a>
-        </div>
+      <PageMainHeader
+        title="Academic Task Management"
+        description="Manage your research milestones and administrative obligations."
+        currentPage="My Tasks"
+      >
+        <Button onclick={exportCSV} variant="outline">
+          <Download className="w-4 h-4" />
+          Export CSV
+        </Button>
 
-        <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="text-5xl font-serif font-bold text-gray-900">
-              Academic Task Management
-            </h1>
-            <p className="mt-2 text-lg text-gray-600">
-              Manage your research milestones and administrative obligations.
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button onclick={exportCSV} variant="outline">
-              <Download className="w-4 h-4" />
-              Export CSV
-            </Button>
+        <TaskPopup
+          open={open}
+          close={close}
+          handleSubmit={handleSubmit}
+          dialogRef={dialogRef}
+        />
+      </PageMainHeader>
 
-            <TaskPopup
-              open={open}
-              close={close}
-              handleSubmit={handleSubmit}
-              dialogRef={dialogRef}
-            />
-          </div>
-        </div>
-      </div>
-      
       <TasksCard handleDelete={handleDelete} tasksupdate={updatetasks || []} />
     </>
   );

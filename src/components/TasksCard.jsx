@@ -15,13 +15,12 @@ const statusDot = {
 };
 
 export default function TaskTable({ tasksupdate, handleDelete }) {
-
   const [statusFilter, setStatusFilter] = useState("All");
   const [priorityFilter, setPriorityFilter] = useState("All");
   const [dayFilter, setDayFilter] = useState("All");
   const [openMenu, setOpenMenu] = useState(null);
   const tasks = tasksupdate;
-  const [ , settasks] = useState(tasks);
+  const [, settasks] = useState(tasks);
   const totalTasks = tasks.length;
 
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -29,10 +28,9 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
   const completionRate =
     totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
 
-    
   const handleclick = (id) => {
     const updatedTasks = [...tasks];
-     const index = updatedTasks.findIndex(task => task.id === id);
+    const index = updatedTasks.findIndex((task) => task.id === id);
     updatedTasks[index].completed = !updatedTasks[index].completed;
     updatedTasks[index].status = updatedTasks[index].completed
       ? "Completed"
@@ -167,87 +165,95 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
           </thead>
 
           <tbody>
-            {filteredTasks.map((task, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="px-6 py-6">
-                  <div className="flex gap-4">
-                    <input
-                      type="checkbox"
-                      readOnly
-                      checked={task.completed}
-                      className="mt-1 h-4 w-4"
-                      onClick={() => {
-                        handleclick(task.id);
-                      }}
-                    />
-
-                    <div>
-                      <h3
-                        className={`font-semibold ${
-                          task.completed && "line-through text-gray-400"
-                        }`}
-                      >
-                        {task.title}
-                      </h3>
-
-                      <p className="mt-1 text-gray-500">{task.description}</p>
-                    </div>
-                  </div>
-                </td>
-
-                <td>
-                  <span
-                    className={`rounded border px-3 py-1 text-xs font-semibold uppercase ${
-                      badgeColors[task.priority]
-                    }`}
-                  >
-                    {task.priority}
-                  </span>
-                </td>
-
-                <td>
-                  <div className="flex items-center gap-2 text-sm font-medium uppercase">
-                    <span
-                      className={`h-2 w-2 rounded-full ${
-                        statusDot[task.status]
-                      }`}
-                    ></span>
-
-                    {task.status}
-                  </div>
-                </td>
-
-                <td className="text-gray-600">{task.dueDate}</td>
-
-                <td className="text-center">
-                  <div className="relative">
-                    <button
-                      className="text-gray-500 hover:text-black"
-                      onClick={() =>
-                        setOpenMenu(openMenu === task.id ? null : task.id)
-                      }
-                    >
-                      <FaEllipsisV />
-                    </button>
-
-                    {openMenu === task.id && (
-                      <div className="absolute right-0 mt-2 w-32 rounded-lg border bg-white shadow-lg">
-                        <button
-                          onClick={() => {
-                            handleDelete(task.id);
-                            setOpenMenu(null);
-                          }}
-                          className="flex w-full items-center gap-2 px-4 py-2 text-left text-red-600 hover:bg-red-50"
-                        >
-                          <FaTrash />
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
+            {filteredTasks.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="py-8 text-center text-gray-500">
+                  No tasks found.
                 </td>
               </tr>
-            ))}
+            ) : (
+              filteredTasks.map((task, index) => (
+                <tr key={index} className="border-b hover:bg-gray-50">
+                  <td className="px-6 py-6">
+                    <div className="flex gap-4">
+                      <input
+                        type="checkbox"
+                        readOnly
+                        checked={task.completed}
+                        className="mt-1 h-4 w-4"
+                        onClick={() => {
+                          handleclick(task.id);
+                        }}
+                      />
+
+                      <div>
+                        <h3
+                          className={`font-semibold ${
+                            task.completed && "line-through text-gray-400"
+                          }`}
+                        >
+                          {task.title}
+                        </h3>
+
+                        <p className="mt-1 text-gray-500">{task.description}</p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span
+                      className={`rounded border px-3 py-1 text-xs font-semibold uppercase ${
+                        badgeColors[task.priority]
+                      }`}
+                    >
+                      {task.priority}
+                    </span>
+                  </td>
+
+                  <td>
+                    <div className="flex items-center gap-2 text-sm font-medium uppercase">
+                      <span
+                        className={`h-2 w-2 rounded-full ${
+                          statusDot[task.status]
+                        }`}
+                      ></span>
+
+                      {task.status}
+                    </div>
+                  </td>
+
+                  <td className="text-gray-600">{task.dueDate}</td>
+
+                  <td className="text-center">
+                    <div className="relative">
+                      <button
+                        className="text-gray-500 hover:text-black"
+                        onClick={() =>
+                          setOpenMenu(openMenu === task.id ? null : task.id)
+                        }
+                      >
+                        <FaEllipsisV />
+                      </button>
+
+                      {openMenu === task.id && (
+                        <div className="absolute right-0 mt-2 w-32 rounded-lg border bg-white shadow-lg">
+                          <button
+                            onClick={() => {
+                              handleDelete(task.id);
+                              setOpenMenu(null);
+                            }}
+                            className="flex w-full items-center gap-2 px-4 py-2 text-left text-red-600 hover:bg-red-50"
+                          >
+                            <FaTrash />
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
