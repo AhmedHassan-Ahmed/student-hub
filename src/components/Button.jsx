@@ -2,7 +2,7 @@ const Button = ({
   variant = "primary",
   children,
   className = "",
-  onclick = false,
+  onclick,
   ...props
 }) => {
   const variants = {
@@ -12,9 +12,9 @@ const Button = ({
 
   return (
     <button
-      className={`inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`}
+      className={`focus:outline-0 inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`}
       {...props}
-      onclick={onclick}
+      onClick={onclick}
     >
       {children}
     </button>
