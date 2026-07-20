@@ -5,6 +5,12 @@ import student1 from "../assets/images/student1.jpg";
 import student2 from "../assets/images/student2.jpeg";
 import student3 from "../assets/images/student3.jpeg";
 function Hero() {
+    const scrollToAbout = () => {
+        const about = document.getElementById("about");
+        if (about) {
+            about.scrollIntoView({ behavior: "smooth" });
+        }
+    };
     return (
         <section id="hero" className="bg-[#0C1225] text-white min-h-[90vh] flex items-center">
             <div className="max-w-7xl mx-auto px-8 py-16 grid lg:grid-cols-2 gap-16 items-center">
@@ -27,10 +33,12 @@ function Hero() {
                             Get Started
                             <ArrowRight size={18}/>
                         </Link>
-                        <button className="border border-[#6C90C3] px-6 py-3 rounded-lg text-[#6C90C3] shadow-lg shadow-[#6C90C3]/30
-                        hover:bg-[#6C90C3] hover:text-[#0C1225]
-                        transition-colors duration-300 cursor-pointer">
-                            Learn More
+                        <button
+                            onClick={scrollToAbout}
+                            className="border border-[#6C90C3] px-6 py-3 rounded-lg text-[#6C90C3] shadow-lg shadow-[#6C90C3]/30
+                            hover:bg-[#6C90C3] hover:text-[#0C1225]
+                            transition-colors duration-300 cursor-pointer">
+                                Learn More
                         </button>
                     </div>
                     <div className="flex items-center gap-4 mt-10">
