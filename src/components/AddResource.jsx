@@ -29,7 +29,7 @@ const AddResource = ({ onAdd }) => {
 
     return (
         <>
-            <Button onClick={open}>
+            <Button onclick={open}>
                 <Plus className="w-4 h-4" />
                 Add Resource
             </Button>
