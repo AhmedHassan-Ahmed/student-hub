@@ -1,31 +1,14 @@
-import { useRef } from "react";
 import Button from "../components/Button";
 import { Plus } from "lucide-react";
 
-const TaskPopup = () => {
-  const dialogRef = useRef();
+const TaskPopup = ({open,close ,dialogRef, handleSubmit}) => {
 
-  const open = () => dialogRef.current.showModal();
-  const close = () => dialogRef.current.close();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    const formData = new FormData(e.target);
-
-    const task = {
-      title: formData.get("title"),
-      description: formData.get("description"),
-      dueDate: formData.get("dueDate"),
-      priority: formData.get("priority"),
-    };
-    console.log(task);
-    close();
-  };
 
   return (
     <>
-      <Button onClick={open}>
+      <Button onclick={open}>
         <Plus className="w-4 h-4" />
         Create Task
       </Button>
@@ -50,6 +33,7 @@ const TaskPopup = () => {
           <div>
             <div className="relative">
               <input
+              required
                 id="title"
                 name="title"
                 type="text"
@@ -80,6 +64,7 @@ const TaskPopup = () => {
           <div>
             <div className="relative">
               <textarea
+              required
                 id="description"
                 name="description"
                 rows="4"
@@ -110,6 +95,7 @@ const TaskPopup = () => {
           <div>
             <div className="relative">
               <input
+              required
                 id="dueDate"
                 name="dueDate"
                 type="date"
@@ -130,6 +116,7 @@ const TaskPopup = () => {
           <div>
             <div className="relative">
               <select
+              required
                 id="priority"
                 name="priority"
                 defaultValue=""
