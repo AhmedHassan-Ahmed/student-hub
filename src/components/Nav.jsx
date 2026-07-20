@@ -22,7 +22,6 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur relative">
       <div className="mx-auto flex h-16 max-w-[114rem] items-center justify-between px-6">
-        {/* Logo */}
         <NavLink
           to="/"
           className="text-xl font-bold tracking-tight text-blue-700"
@@ -30,7 +29,6 @@ const Navbar = () => {
           Student-Hub
         </NavLink>
 
-        {/* Desktop Navigation */}
         <div className="hidden items-center gap-2 md:flex">
           <NavLink to="/" className={linkClass} end>
             <FaHome />
@@ -58,7 +56,6 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
           className="rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:hidden"
@@ -67,7 +64,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
       {open && (
         <div className="absolute right-6 top-16 w-56 rounded-xl border border-gray-200 bg-white p-2 shadow-xl md:hidden">
           <div className="flex flex-col gap-1">

@@ -1,14 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
-import Dashboard from "./pages/Dashboard";
+import Router from "./router/Router";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
-  );
+  return <Router></Router>;
 }
 
 export default App;
