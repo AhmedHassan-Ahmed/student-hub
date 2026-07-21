@@ -15,7 +15,7 @@ const EditProfile = ({ user, onSave }) => {
             const reader = new FileReader();
 
             reader.onloadend = () => {
-                setPreview(reader.result); // ✅ ده Base64
+                setPreview(reader.result);
             };
 
             reader.readAsDataURL(file);
@@ -155,7 +155,6 @@ const EditProfile = ({ user, onSave }) => {
                         />
                     </div>
 
-                    {/* ACTIONS */}
                     <div className="flex justify-end gap-3">
                         <button onClick={close} type="button" className="border px-4 py-2 rounded">
                             Cancel
