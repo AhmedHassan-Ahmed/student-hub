@@ -2,18 +2,18 @@ import NotesCard from "../components/NotesCard";
 import PageMainHeader from "../components/PageMainHeader";
 import NotePopup from "../components/NotePopup";
 import { v4 as uuidv4 } from "uuid";
-import { useState, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 const Notepage = () => {
   const [selectedNote, setSelectedNote] = useState(null);
 
-  const viewDialogRef = useRef(null);
+  const [viewOpen, setViewOpen] = useState(false);
   const [notes, setNotes] = useState(
     JSON.parse(localStorage.getItem("Notes")) || [],
   );
-  const dialogRef = useRef();
-  const open = () => dialogRef.current.showModal();
-  const close = () => dialogRef.current.close();
-
+  const [open, setOpen] = useState(false);
+  const openPopup = () => setOpen(true);
+  const closePopup = () => setOpen(false);
   const handlesubmit = (e) => {
     e.preventDefault();
 
@@ -36,7 +36,7 @@ const Notepage = () => {
     localStorage.setItem("Notes", JSON.stringify(updatedNotes));
 
     form.reset();
-    close();
+    closePopup();
   };
 
   const handleDelete = (id) => {
@@ -49,12 +49,11 @@ const Notepage = () => {
 
   const handleView = (note) => {
     setSelectedNote(note);
-
-    viewDialogRef.current.showModal();
+    setViewOpen(true);
   };
 
   const closeView = () => {
-    viewDialogRef.current.close();
+    setViewOpen(false);
   };
 
   return (
@@ -70,51 +69,79 @@ const Notepage = () => {
         handleDelete={handleDelete}
       >
         <NotePopup
-          dialogRef={dialogRef}
-          open={open}
-          close={close}
+          isOpen={open}
+          open={openPopup}
+          close={closePopup}
           handlesubmit={handlesubmit}
         />
       </NotesCard>
+      <AnimatePresence>
+        {viewOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="w-full max-w-xl rounded-xl bg-white shadow-2xl"
+              initial={{
+                opacity: 0,
+                scale: 0.9,
+                y: 30,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.9,
+                y: 30,
+              }}
+              transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
+            >
+              {selectedNote && (
+                <div className="p-6">
+                  <div className="mb-6 flex items-center justify-between">
+                    <h2 className="text-2xl font-bold">{selectedNote.title}</h2>
 
-      <dialog
-        ref={viewDialogRef}
-        className="m-auto w-[95%] max-w-xl rounded-xl p-0 shadow-2xl backdrop:bg-black/50"
-      >
-        {selectedNote && (
-          <div className="p-6">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold">{selectedNote.title}</h2>
+                    <button
+                      onClick={closeView}
+                      className="text-2xl text-gray-500 hover:text-black"
+                    >
+                      x
+                    </button>
+                  </div>
 
-              <button
-                onClick={closeView}
-                className="text-2xl text-gray-500 hover:text-black"
-              >
-                x
-              </button>
-            </div>
+                  <p className="whitespace-pre-wrap leading-7 text-gray-700">
+                    {selectedNote.content}
+                  </p>
 
-            <p className="whitespace-pre-wrap leading-7 text-gray-700">
-              {selectedNote.content}
-            </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {selectedNote.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              {selectedNote.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-6 text-sm text-gray-500">
-              Created: {selectedNote.createdAt}
-            </p>
-          </div>
+                  <p className="mt-6 text-sm text-gray-500">
+                    Created: {selectedNote.createdAt}
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
         )}
-      </dialog>
+      </AnimatePresence>
     </>
   );
 };
