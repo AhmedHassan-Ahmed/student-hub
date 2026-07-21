@@ -40,16 +40,30 @@ function Resource() {
                 <AddResource onAdd={handleAdd} />
             </PageMainHeader>
 
-            <div className="grid grid-cols-1 gap-5
-                pt-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {resources.map((res) => (
-                    <ResourceCard
-                        key={res.id}
-                        resource={res}
-                        onDelete={handleDelete}
-                        onCheck={handleCheck} />
-                ))}
-            </div>
+            {resources.length > 0 ? (
+                <div className="grid grid-cols-1 gap-5 pt-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {resources.map((res) => (
+                        <ResourceCard
+                            key={res.id}
+                            resource={res}
+                            onDelete={handleDelete}
+                            onCheck={handleCheck}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="flex flex-col items-center justify-center text-center py-20 text-gray-400">
+
+                    <p className="text-lg font-medium mb-2">
+                        No resources
+                    </p>
+
+                    <p className="text-sm mb-6">
+                        Start adding your learning resources
+                    </p>
+
+                </div>
+            )}
         </div>
 
     );

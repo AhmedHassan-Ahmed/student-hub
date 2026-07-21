@@ -28,13 +28,14 @@ function ResourceCard({ resource, onDelete, onCheck }) {
 
             </div>
 
-            <p className="p-2 text-gray-500">
+            <p className="py-2 px-4 text-gray-500">
                 {resource.description}</p>
 
             <div>
-                <button className="resource_btn my-2 mx-4 float-right cursor-pointer text-primary
-                transition-all duration-1000 ease-in-out "
-                ><a href={resource.link} target="_blank">Explore Now</a></button>
+                <button className="bg-blue-500 px-32 py-1 m-5 rounded-lg text-white cursor-pointer
+                hover:bg-blue-600 transition-all duration-1000 ease-in-out ">
+                    <a href={resource.link} target="_blank">Explore Now</a>
+                </button>
             </div>
 
         </div>
