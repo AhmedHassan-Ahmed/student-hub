@@ -36,9 +36,8 @@ export default function Tasks() {
     const updated = tasks;
     updated.push(...task);
     const finaltasks = JSON.stringify(updated);
-    localStorage.setItem("Tasks", finaltasks);
     settasks(updated);
-
+    localStorage.setItem("Tasks", finaltasks);
     close();
     e.target.reset();
   };
