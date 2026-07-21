@@ -33,7 +33,7 @@ function Hero() {
                             Get Started
                             <ArrowRight size={18}/>
                         </Link>
-                        <button
+                        <button 
                             onClick={scrollToAbout}
                             className="border border-[#6C90C3] px-6 py-3 rounded-lg text-[#6C90C3] shadow-lg shadow-[#6C90C3]/30
                             hover:bg-[#6C90C3] hover:text-[#0C1225]
