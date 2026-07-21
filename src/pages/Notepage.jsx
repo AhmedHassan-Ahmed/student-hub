@@ -1,6 +1,7 @@
 import NotesCard from "../components/NotesCard";
 import PageMainHeader from "../components/PageMainHeader";
 import NotePopup from "../components/NotePopup";
+import { v4 as uuidv4 } from "uuid";
 import { useState, useRef } from "react";
 const Notepage = () => {
   const [selectedNote, setSelectedNote] = useState(null);
@@ -19,7 +20,7 @@ const Notepage = () => {
     const form = e.target;
 
     const note = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       title: form.title.value,
       content: form.content.value,
       tags: form.tags.value
@@ -75,7 +76,7 @@ const Notepage = () => {
           handlesubmit={handlesubmit}
         />
       </NotesCard>
-      
+
       <dialog
         ref={viewDialogRef}
         className="m-auto w-[95%] max-w-xl rounded-xl p-0 shadow-2xl backdrop:bg-black/50"

@@ -5,6 +5,7 @@ import TasksCard from "../components/TasksCard";
 import { useRef } from "react";
 import exportCSV from "../functions/exportCSV";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import PageMainHeader from "../components/PageMainHeader";
 export default function Tasks() {
   const dialogRef = useRef();
@@ -23,7 +24,7 @@ export default function Tasks() {
 
     const task = [
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         title: formData.get("title"),
         description: formData.get("description"),
         dueDate: formData.get("dueDate"),
