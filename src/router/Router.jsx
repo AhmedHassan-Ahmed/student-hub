@@ -6,6 +6,7 @@ import Layout from "../layout/layout";
 import Landing from "../pages/Landing";
 import Dashboard from "../pages/Dashboard";
 import Notepage from "../pages/Notepage";
+import Profile from "../pages/Profile";
 
 export default function Router() {
   return (
@@ -14,7 +15,7 @@ export default function Router() {
         <Route path="/resource" element={<Resource />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/notes" element={<Notepage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>

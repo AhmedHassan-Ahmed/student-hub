@@ -24,6 +24,7 @@ const AddResource = ({ onAdd }) => {
 
         onAdd(resource);
         close();
+        e.target.reset();
 
     };
 
