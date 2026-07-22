@@ -6,7 +6,7 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
     <>
       <button
         onClick={open}
-        className="focus:outline-0 flex h-64 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 transition hover:border-blue-500 hover:bg-blue-50 sm:h-72 lg:h-96"
+        className="focus:outline-0 flex h-64 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 transition hover:border-blue-500 hover:bg-blue-50 sm:h-96 lg:h-96"
       >
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow">
           <span className="text-2xl text-blue-600">+</span>

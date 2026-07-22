@@ -2,20 +2,30 @@ import Button from "../components/Button";
 import { Download } from "lucide-react";
 import TaskPopup from "../components/TaskPopup";
 import TasksCard from "../components/TasksCard";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import exportCSV from "../functions/exportCSV";
 import { v4 as uuidv4 } from "uuid";
 import PageMainHeader from "../components/PageMainHeader";
 
 export default function Tasks() {
-  const dialogRef = useRef();
+  const [deletingId, setDeletingId] = useState(null);
 
   const tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
   const [updatetasks, settasks] = useState(tasks);
 
-  const open = () => dialogRef.current.showModal();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const close = () => dialogRef.current.close();
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
+  const deleteTask = (id) => {
+    setDeletingId(id);
+
+    setTimeout(() => {
+      handleDelete(id);
+      setDeletingId(null);
+    }, 300);
+  };
 
   const handleDelete = (id) => {
     const updatedTasks = updatetasks.filter((task) => task.id !== id);
@@ -65,15 +75,16 @@ export default function Tasks() {
         </Button>
 
         <TaskPopup
+          isOpen={isOpen}
           open={open}
           close={close}
           handleSubmit={handleSubmit}
-          dialogRef={dialogRef}
         />
       </PageMainHeader>
 
       <TasksCard
-        handleDelete={handleDelete}
+        deleteTask={deleteTask}
+        deletingId={deletingId}
         tasksupdate={updatetasks}
       />
     </>

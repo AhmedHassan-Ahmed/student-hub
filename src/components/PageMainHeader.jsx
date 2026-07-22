@@ -6,7 +6,7 @@ const PageMainHeader = ({
   children,
 }) => {
   return (
-    <div className="border-b border-gray-200 bg-white px-8 py-5">
+    <div className="border-b border-gray-200 bg-white px-7 md:px-8 py-5">
       <div className="flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">
         <a href="#" className="hover:text-gray-700">
           {breadcrumb}
@@ -25,14 +25,10 @@ const PageMainHeader = ({
             {title}
           </h1>
 
-          <p className="mt-2 text-lg text-gray-600">
-            {description}
-          </p>
+          <p className="mt-2 text-lg text-gray-600">{description}</p>
         </div>
 
-        <div className="flex items-center gap-3">
-          {children}
-        </div>
+        <div className="flex items-center gap-3">{children}</div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { FaEllipsisV, FaFilter, FaTrash } from "react-icons/fa";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const badgeColors = {
   Urgent: "bg-red-100 text-red-600",
@@ -14,7 +15,7 @@ const statusDot = {
   Completed: "bg-gray-400",
 };
 
-export default function TaskTable({ tasksupdate, handleDelete }) {
+export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
   const [statusFilter, setStatusFilter] = useState("All");
   const [priorityFilter, setPriorityFilter] = useState("All");
   const [dayFilter, setDayFilter] = useState("All");
@@ -66,7 +67,10 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
   });
 
   return (
-    <div className="space-y-8 p-4 sm:p-6 lg:p-8">
+    <div
+      className="space-y-8 p-4 sm:p-6 lg:p-8"
+      onClick={() => setOpenMenu(null)}
+    >
       <div className="grid gap-5 lg:grid-cols-4">
         <div className="rounded-xl border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -147,8 +151,8 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
           </p>
         </div>
       </div>
-      <div className="overflow-x-auto rounded-xl border-0 md:border-1 bg-white shadow-sm">
-        <div className="hidden md:block overflow-x-auto rounded-2xl border-0 md:border-1 border-gray-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-xl border-0  bg-white shadow-sm">
+        <div className="pb-8 hidden md:block overflow-x-auto rounded-2xl border-0  border-gray-200 bg-white shadow-sm">
           <table className="min-w-[850px] w-full">
             <thead className="border-b border-gray-200 bg-gray-50 text-left text-xs uppercase tracking-widest text-gray-500">
               <tr>
@@ -169,9 +173,17 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                 </tr>
               ) : (
                 filteredTasks.map((task) => (
-                  <tr
+                  <motion.tr
                     key={task.id}
-                    className="border-b border-gray-100 transition hover:bg-gray-50"
+                    layout
+                    initial={{ opacity: 1, x: 0 }}
+                    animate={
+                      deletingId === task.id
+                        ? { opacity: 0, x: -200 }
+                        : { opacity: 1, x: 0 }
+                    }
+                    transition={{ duration: 0.3 }}
+                    className="border-b border-gray-100 hover:bg-gray-50"
                   >
                     <td className="px-6 py-5">
                       <div className="flex gap-4">
@@ -225,9 +237,10 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                       <div className="relative inline-block">
                         <button
                           className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
-                          onClick={() =>
-                            setOpenMenu(openMenu === task.id ? null : task.id)
-                          }
+                          onClick={(e) => {
+                            setOpenMenu(openMenu === task.id ? null : task.id);
+                            e.stopPropagation();
+                          }}
                         >
                           <FaEllipsisV />
                         </button>
@@ -236,7 +249,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                           <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
                             <button
                               onClick={() => {
-                                handleDelete(task.id);
+                                deleteTask(task.id);
                                 setOpenMenu(null);
                               }}
                               className="flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-red-600 transition hover:bg-red-50"
@@ -248,7 +261,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                         )}
                       </div>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))
               )}
             </tbody>
@@ -257,14 +270,30 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
 
         <div className="space-y-4 md:hidden">
           {filteredTasks.length === 0 ? (
-            <div className="rounded-2xl border-0 md:border-1 border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
+            <div className="rounded-2xl border-0  border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
               No tasks found.
             </div>
           ) : (
             filteredTasks.map((task) => (
-              <div
+              <motion.div
                 key={task.id}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md"
+                layout
+                initial={{ opacity: 1, x: 0 }}
+                animate={
+                  deletingId === task.id
+                    ? {
+                        opacity: 0,
+                        x: -200,
+                        scale: 0.95,
+                      }
+                    : {
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                      }
+                }
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex gap-3">
@@ -296,9 +325,10 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                   <div className="relative">
                     <button
                       className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
-                      onClick={() =>
-                        setOpenMenu(openMenu === task.id ? null : task.id)
-                      }
+                      onClick={(e) => {
+                        setOpenMenu(openMenu === task.id ? null : task.id);
+                        e.stopPropagation();
+                      }}
                     >
                       <FaEllipsisV />
                     </button>
@@ -307,7 +337,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                       <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
                         <button
                           onClick={() => {
-                            handleDelete(task.id);
+                            deleteTask(task.id);
                             setOpenMenu(null);
                           }}
                           className="flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-red-600 transition hover:bg-red-50"
@@ -338,7 +368,7 @@ export default function TaskTable({ tasksupdate, handleDelete }) {
                     📅 {task.dueDate}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))
           )}
         </div>

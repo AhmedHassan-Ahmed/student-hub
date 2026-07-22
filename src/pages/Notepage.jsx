@@ -14,6 +14,18 @@ const Notepage = () => {
   const [open, setOpen] = useState(false);
   const openPopup = () => setOpen(true);
   const closePopup = () => setOpen(false);
+
+  const [deletingId, setDeletingId] = useState(null);
+
+  const deleteNote = (id) => {
+    setDeletingId(id);
+
+    setTimeout(() => {
+      handleDelete(id);
+      setDeletingId(null);
+    }, 300);
+  };
+
   const handlesubmit = (e) => {
     e.preventDefault();
 
@@ -66,7 +78,8 @@ const Notepage = () => {
       <NotesCard
         notes={notes}
         handleView={handleView}
-        handleDelete={handleDelete}
+        handleDelete={deleteNote}
+        deletingId={deletingId}
       >
         <NotePopup
           isOpen={open}
@@ -82,9 +95,11 @@ const Notepage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={closeView}
           >
             <motion.div
               className="w-full max-w-xl rounded-xl bg-white shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
               initial={{
                 opacity: 0,
                 scale: 0.9,

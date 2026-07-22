@@ -1,16 +1,45 @@
 import { useState } from "react";
 import { FaEllipsisV, FaEye, FaTrash } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-function NotesCard({ notes = [], handleDelete, handleView, children }) {
+function NotesCard({
+  notes = [],
+  handleDelete,
+  handleView,
+  deletingId,
+  children,
+}) {
   const [openMenu, setOpenMenu] = useState(null);
   return (
-    <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div
+      onClick={() => setOpenMenu(null)}
+      className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
       {children}
 
       {notes.map((note) => (
-        <div
+        <motion.div
           key={note.id}
-          className="flex h-96 flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-lg"
+          layout
+          initial={{ opacity: 1, scale: 1 }}
+          animate={
+            deletingId === note.id
+              ? {
+                  opacity: 0,
+                  scale: 0,
+                  rotate: 8,
+                }
+              : {
+                  opacity: 1,
+                  scale: 1,
+                  rotate: 0,
+                }
+          }
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+          className="flex h-96 flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-lg"
         >
           {note.image && (
             <img
@@ -29,16 +58,20 @@ function NotesCard({ notes = [], handleDelete, handleView, children }) {
 
             <div className="relative inline-block">
               <button
-                onClick={() =>
-                  setOpenMenu(openMenu === note.id ? null : note.id)
-                }
+                onClick={(e) => {
+                  setOpenMenu(openMenu === note.id ? null : note.id);
+                  e.stopPropagation();
+                }}
                 className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
               >
                 <FaEllipsisV />
               </button>
 
               {openMenu === note.id && (
-                <div className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-lg border bg-white shadow-lg">
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-lg border bg-white shadow-lg"
+                >
                   <button
                     onClick={() => {
                       handleView(note);
@@ -81,7 +114,7 @@ function NotesCard({ notes = [], handleDelete, handleView, children }) {
           <div className="mt-auto flex items-center justify-between border-t pt-4 text-sm text-gray-500">
             <span>{note.date}</span>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
