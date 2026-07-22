@@ -6,6 +6,7 @@ import { useState } from "react";
 import exportCSV from "../functions/exportCSV";
 import { v4 as uuidv4 } from "uuid";
 import PageMainHeader from "../components/PageMainHeader";
+import UploadButton from "../components/UploadButton";
 
 export default function Tasks() {
   const [deletingId, setDeletingId] = useState(null);
@@ -62,6 +63,40 @@ export default function Tasks() {
     e.target.reset();
   };
 
+  const handleUpload = (file) => {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const csv = event.target.result;
+
+      const rows = csv.trim().split("\n");
+      const clean = (value) => value.trim().replace(/^"|"$/g, "");
+
+      const tasks = rows.slice(1).map((row) => {
+        const [title, description, dueDate, priority, status, completed] = row
+          .split(",")
+          .map(clean);
+
+        return {
+          id: uuidv4(),
+          title,
+          description,
+          priority,
+          dueDate,
+          status,
+          completed: completed === "true",
+        };
+      });
+
+      const updated = [...updatetasks, ...tasks];
+
+      settasks(updated);
+      localStorage.setItem("Tasks", JSON.stringify(updated));
+    };
+
+    reader.readAsText(file);
+  };
+
   return (
     <>
       <PageMainHeader
@@ -73,6 +108,8 @@ export default function Tasks() {
           <Download className="w-4 h-4" />
           Export CSV
         </Button>
+
+        <UploadButton onUpload={handleUpload} />
 
         <TaskPopup
           isOpen={isOpen}

@@ -6,13 +6,14 @@ const Button = ({
   ...props
 }) => {
   const variants = {
-    primary: "bg-blue-700 text-white hover:bg-blue-800 transition-all duration-500",
+    primary:
+      "bg-blue-700 text-white hover:bg-blue-800 transition-all duration-500",
     outline: "border border-blue-600 bg-white text-blue-600 hover:bg-blue-50",
   };
 
   return (
     <button
-      className={`focus:outline-0 inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`}
+      className={`focus:outline-0 inline-flex w-full items-center justify-center gap-2 px-4 py-2 text-sm font-semibold transition sm:w-auto sm:px-5 sm:py-3 ${variants[variant]} ${className}`}
       {...props}
       onClick={onclick}
     >

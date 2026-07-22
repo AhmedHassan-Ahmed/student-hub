@@ -2,6 +2,7 @@ import { FaEllipsisV, FaFilter, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import getDateLabel from "../functions/getDateLabel";
+import { Fragment } from "react";
 
 const badgeColors = {
   Urgent: "bg-red-100 text-red-600",
@@ -184,7 +185,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                     index === 0 || previousTask.dueDate !== task.dueDate;
 
                   return (
-                    <>
+                    <Fragment key={task.id}>
                       {showDate && (
                         <tr key={`date-${task.dueDate}`}>
                           <td colSpan={5} className="bg-gray-50 px-6 py-3">
@@ -286,7 +287,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                           </div>
                         </td>
                       </motion.tr>
-                    </>
+                    </Fragment>
                   );
                 })
               )}

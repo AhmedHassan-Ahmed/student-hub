@@ -21,9 +21,8 @@ const exportCSV = () => {
     task.dueDate,
     task.priority,
     task.status,
-    task.completed ? "Yes" : "No",
+    task.completed ? true : false,
   ]);
-
   const csv = [
     headers.join(","),
     ...rows.map((row) =>
