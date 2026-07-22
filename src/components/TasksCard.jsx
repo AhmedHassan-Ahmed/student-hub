@@ -1,6 +1,7 @@
 import { FaEllipsisV, FaFilter, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import getDateLabel from "../functions/getDateLabel";
 
 const badgeColors = {
   Urgent: "bg-red-100 text-red-600",
@@ -65,6 +66,10 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
     return true;
   });
+
+  const sortedTasks = [...filteredTasks].sort(
+    (a, b) => new Date(b.dueDate) - new Date(a.dueDate),
+  );
 
   return (
     <div
@@ -172,21 +177,165 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                   </td>
                 </tr>
               ) : (
-                filteredTasks.map((task) => (
-                  <motion.tr
+                sortedTasks.map((task, index) => {
+                  const previousTask = sortedTasks[index - 1];
+
+                  const showDate =
+                    index === 0 || previousTask.dueDate !== task.dueDate;
+
+                  return (
+                    <>
+                      {showDate && (
+                        <tr key={`date-${task.dueDate}`}>
+                          <td colSpan={5} className="bg-gray-50 px-6 py-3">
+                            <h2 className="font-semibold text-gray-700">
+                              {getDateLabel(task.dueDate)}
+                            </h2>
+                          </td>
+                        </tr>
+                      )}
+
+                      <motion.tr
+                        key={task.id}
+                        layout
+                        initial={{ opacity: 1, x: 0 }}
+                        animate={
+                          deletingId === task.id
+                            ? { opacity: 0, x: -200 }
+                            : { opacity: 1, x: 0 }
+                        }
+                        transition={{ duration: 0.3 }}
+                        className="border-b border-gray-100 hover:bg-gray-50"
+                      >
+                        <td className="px-6 py-5">
+                          <div className="flex gap-4">
+                            <input
+                              type="checkbox"
+                              readOnly
+                              checked={task.completed}
+                              onClick={() => handleclick(task.id)}
+                              className="mt-1 h-4 w-4"
+                            />
+
+                            <div>
+                              <h3
+                                className={`font-semibold ${
+                                  task.completed
+                                    ? "line-through text-gray-400"
+                                    : "text-gray-900"
+                                }`}
+                              >
+                                {task.title}
+                              </h3>
+
+                              <p className="mt-1 line-clamp-2 text-sm text-gray-500">
+                                {task.description}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="px-4">
+                          <span
+                            className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase ${badgeColors[task.priority]}`}
+                          >
+                            {task.priority}
+                          </span>
+                        </td>
+
+                        <td className="px-4">
+                          <div className="flex items-center gap-2 text-sm font-medium uppercase">
+                            <span
+                              className={`h-2 w-2 rounded-full ${statusDot[task.status]}`}
+                            ></span>
+
+                            {task.status}
+                          </div>
+                        </td>
+
+                        <td className="px-4 text-gray-600">{task.dueDate}</td>
+
+                        <td className="px-4 text-center">
+                          <div className="relative inline-block">
+                            <button
+                              className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                              onClick={(e) => {
+                                setOpenMenu(
+                                  openMenu === task.id ? null : task.id,
+                                );
+                                e.stopPropagation();
+                              }}
+                            >
+                              <FaEllipsisV />
+                            </button>
+
+                            {openMenu === task.id && (
+                              <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
+                                <button
+                                  onClick={() => {
+                                    deleteTask(task.id);
+                                    setOpenMenu(null);
+                                  }}
+                                  className="flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-red-600 transition hover:bg-red-50"
+                                >
+                                  <FaTrash />
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                      </motion.tr>
+                    </>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="space-y-4 md:hidden">
+          {filteredTasks.length === 0 ? (
+            <div className="rounded-2xl border-0  border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
+              No tasks found.
+            </div>
+          ) : (
+            sortedTasks.map((task, index) => {
+              const previousTask = sortedTasks[index - 1];
+
+              const showDate =
+                index === 0 || previousTask.dueDate !== task.dueDate;
+
+              return (
+                <div key={task.id}>
+                  {showDate && (
+                    <h2 className="mb-3 mt-6 border-b pb-2 text-lg font-bold text-gray-700">
+                      {getDateLabel(task.dueDate)}
+                    </h2>
+                  )}
+
+                  <motion.div
                     key={task.id}
                     layout
                     initial={{ opacity: 1, x: 0 }}
                     animate={
                       deletingId === task.id
-                        ? { opacity: 0, x: -200 }
-                        : { opacity: 1, x: 0 }
+                        ? {
+                            opacity: 0,
+                            x: -200,
+                            scale: 0.95,
+                          }
+                        : {
+                            opacity: 1,
+                            x: 0,
+                            scale: 1,
+                          }
                     }
                     transition={{ duration: 0.3 }}
-                    className="border-b border-gray-100 hover:bg-gray-50"
+                    className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md"
                   >
-                    <td className="px-6 py-5">
-                      <div className="flex gap-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex gap-3">
                         <input
                           type="checkbox"
                           readOnly
@@ -206,35 +355,13 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                             {task.title}
                           </h3>
 
-                          <p className="mt-1 line-clamp-2 text-sm text-gray-500">
+                          <p className="mt-2 text-sm text-gray-500">
                             {task.description}
                           </p>
                         </div>
                       </div>
-                    </td>
 
-                    <td className="px-4">
-                      <span
-                        className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase ${badgeColors[task.priority]}`}
-                      >
-                        {task.priority}
-                      </span>
-                    </td>
-
-                    <td className="px-4">
-                      <div className="flex items-center gap-2 text-sm font-medium uppercase">
-                        <span
-                          className={`h-2 w-2 rounded-full ${statusDot[task.status]}`}
-                        ></span>
-
-                        {task.status}
-                      </div>
-                    </td>
-
-                    <td className="px-4 text-gray-600">{task.dueDate}</td>
-
-                    <td className="px-4 text-center">
-                      <div className="relative inline-block">
+                      <div className="relative">
                         <button
                           className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
                           onClick={(e) => {
@@ -260,116 +387,30 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                           </div>
                         )}
                       </div>
-                    </td>
-                  </motion.tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="space-y-4 md:hidden">
-          {filteredTasks.length === 0 ? (
-            <div className="rounded-2xl border-0  border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
-              No tasks found.
-            </div>
-          ) : (
-            filteredTasks.map((task) => (
-              <motion.div
-                key={task.id}
-                layout
-                initial={{ opacity: 1, x: 0 }}
-                animate={
-                  deletingId === task.id
-                    ? {
-                        opacity: 0,
-                        x: -200,
-                        scale: 0.95,
-                      }
-                    : {
-                        opacity: 1,
-                        x: 0,
-                        scale: 1,
-                      }
-                }
-                transition={{ duration: 0.3 }}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex gap-3">
-                    <input
-                      type="checkbox"
-                      readOnly
-                      checked={task.completed}
-                      onClick={() => handleclick(task.id)}
-                      className="mt-1 h-4 w-4"
-                    />
-
-                    <div>
-                      <h3
-                        className={`font-semibold ${
-                          task.completed
-                            ? "line-through text-gray-400"
-                            : "text-gray-900"
-                        }`}
-                      >
-                        {task.title}
-                      </h3>
-
-                      <p className="mt-2 text-sm text-gray-500">
-                        {task.description}
-                      </p>
                     </div>
-                  </div>
 
-                  <div className="relative">
-                    <button
-                      className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
-                      onClick={(e) => {
-                        setOpenMenu(openMenu === task.id ? null : task.id);
-                        e.stopPropagation();
-                      }}
-                    >
-                      <FaEllipsisV />
-                    </button>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      <span
+                        className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase ${badgeColors[task.priority]}`}
+                      >
+                        {task.priority}
+                      </span>
 
-                    {openMenu === task.id && (
-                      <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
-                        <button
-                          onClick={() => {
-                            deleteTask(task.id);
-                            setOpenMenu(null);
-                          }}
-                          className="flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-red-600 transition hover:bg-red-50"
-                        >
-                          <FaTrash />
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                      <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
+                        <span
+                          className={`h-2 w-2 rounded-full ${statusDot[task.status]}`}
+                        ></span>
+                        {task.status}
+                      </span>
+
+                      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                        📅 {task.dueDate}
+                      </span>
+                    </div>
+                  </motion.div>
                 </div>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  <span
-                    className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase ${badgeColors[task.priority]}`}
-                  >
-                    {task.priority}
-                  </span>
-
-                  <span className="flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
-                    <span
-                      className={`h-2 w-2 rounded-full ${statusDot[task.status]}`}
-                    ></span>
-                    {task.status}
-                  </span>
-
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-                    📅 {task.dueDate}
-                  </span>
-                </div>
-              </motion.div>
-            ))
+              );
+            })
           )}
         </div>
       </div>

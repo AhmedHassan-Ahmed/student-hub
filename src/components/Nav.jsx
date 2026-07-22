@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaHome,
@@ -9,9 +8,7 @@ import {
   FaEllipsisV,
 } from "react-icons/fa";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
+const Navbar = ({ open, setOpen }) => {
   const linkClass = ({ isActive }) =>
     `flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
       isActive
@@ -20,7 +17,12 @@ const Navbar = () => {
     }`;
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur relative">
+    <nav
+      onClick={() => {
+        setOpen(open ? false : false);
+      }}
+      className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur relative"
+    >
       <div className="mx-auto flex h-16 max-w-[114rem] items-center justify-between px-6">
         <NavLink
           to="/"
@@ -57,7 +59,10 @@ const Navbar = () => {
         </div>
 
         <button
-          onClick={() => setOpen(!open)}
+          onClick={(e) => {
+            setOpen(!open);
+            e.stopPropagation();
+          }}
           className="rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:hidden"
         >
           <FaEllipsisV />
@@ -65,7 +70,10 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <div className="absolute right-6 top-16 w-56 rounded-xl border border-gray-200 bg-white p-2 shadow-xl md:hidden">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute right-6 top-16 w-56 rounded-xl border border-gray-200 bg-white p-2 shadow-xl md:hidden"
+        >
           <div className="flex flex-col gap-1">
             <NavLink
               to="/"

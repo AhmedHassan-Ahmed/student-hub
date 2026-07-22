@@ -17,6 +17,7 @@ export default function Router() {
         <Route path="/notes" element={<Notepage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Landing />} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
     </Routes>
