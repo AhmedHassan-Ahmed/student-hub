@@ -1,6 +1,7 @@
 import NotesCard from "../components/NotesCard";
 import PageMainHeader from "../components/PageMainHeader";
 import NotePopup from "../components/NotePopup";
+import PagesFooter from "../components/PagesFooter";
 import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -157,6 +158,7 @@ const Notepage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <PagesFooter />
     </>
   );
 };

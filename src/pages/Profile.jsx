@@ -5,6 +5,7 @@ import BioSection from "../components/BioSection";
 import ContactSection from "../components/ContactSection";
 import SkillsSection from "../components/SkillsSection";
 import EditProfile from "../components/EditProfile";
+import PagesFooter from "../components/PagesFooter";
 
 function Profile() {
     const [user, setUser] = useState(() => {
@@ -54,6 +55,8 @@ function Profile() {
             <ContactSection user={user} />
 
             <SkillsSection user={user} />
+
+            <PagesFooter />
         </div>
     );
 }

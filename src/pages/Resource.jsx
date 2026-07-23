@@ -4,6 +4,7 @@ import AddResource from "../components/AddResource";
 import PageMainHeader from "../components/PageMainHeader";
 import Button from "../components/Button";
 import ProgressBox from "../components/ResourcesProgressBox";
+import PagesFooter from "../components/PagesFooter";
 
 function Resource() {
     const [resources, setResources] = useState(() => {
@@ -132,6 +133,8 @@ function Resource() {
 
                 </div>
             )}
+
+            <PagesFooter />
         </div>
 
     );

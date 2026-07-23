@@ -7,6 +7,7 @@ import exportCSV from "../functions/exportCSV";
 import { v4 as uuidv4 } from "uuid";
 import PageMainHeader from "../components/PageMainHeader";
 import UploadButton from "../components/UploadButton";
+import PagesFooter from "../components/PagesFooter";
 
 export default function Tasks() {
   const [deletingId, setDeletingId] = useState(null);
@@ -124,6 +125,8 @@ export default function Tasks() {
         deletingId={deletingId}
         tasksupdate={updatetasks}
       />
+
+      <PagesFooter />
     </>
   );
 }
