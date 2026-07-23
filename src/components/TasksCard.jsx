@@ -220,11 +220,10 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
                             <div>
                               <h3
-                                className={`font-semibold ${
-                                  task.completed
+                                className={`font-semibold ${task.completed
                                     ? "line-through text-gray-400"
                                     : "text-gray-900"
-                                }`}
+                                  }`}
                               >
                                 {task.title}
                               </h3>
@@ -322,15 +321,15 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                     animate={
                       deletingId === task.id
                         ? {
-                            opacity: 0,
-                            x: -200,
-                            scale: 0.95,
-                          }
+                          opacity: 0,
+                          x: -200,
+                          scale: 0.95,
+                        }
                         : {
-                            opacity: 1,
-                            x: 0,
-                            scale: 1,
-                          }
+                          opacity: 1,
+                          x: 0,
+                          scale: 1,
+                        }
                     }
                     transition={{ duration: 0.3 }}
                     className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md"
@@ -347,11 +346,10 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
                         <div>
                           <h3
-                            className={`font-semibold ${
-                              task.completed
+                            className={`font-semibold ${task.completed
                                 ? "line-through text-gray-400"
                                 : "text-gray-900"
-                            }`}
+                              }`}
                           >
                             {task.title}
                           </h3>

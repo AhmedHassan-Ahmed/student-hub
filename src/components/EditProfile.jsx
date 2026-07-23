@@ -156,11 +156,11 @@ const EditProfile = ({ user, onSave }) => {
                     </div>
 
                     <div className="flex justify-end gap-3">
-                        <button onClick={close} type="button" className="border px-4 py-2 rounded">
+                        <button onClick={close} type="button" className="border px-4 py-2 rounded hover:bg-gray-100 sm:w-auto transition-all duration-300">
                             Cancel
                         </button>
 
-                        <button type="submit" className="bg-blue-700 text-white px-4 py-2 rounded">
+                        <button type="submit" className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 sm:w-auto transition-all duration-300">
                             Save
                         </button>
                     </div>
