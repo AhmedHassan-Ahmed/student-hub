@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Nav from "../components/Nav";
 import { useState } from "react";
 
 const Layout = () => {
   const [open, setOpen] = useState(false);
-
+  const location = useLocation();
   return (
     <>
+    {location.pathname !== "/dashboard" && (
       <Nav open={open} setOpen={setOpen} />
+      )}
       <main
         onClick={() => {
           setOpen(open ? false : false);

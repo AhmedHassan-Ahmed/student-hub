@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Menu } from "lucide-react";
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -18,7 +19,7 @@ function Navbar() {
                     Get Started
                 </Link>
                 <button className="md:hidden text-3xl" onClick={() => setIsOpen(!isOpen)}>
-                    ☰
+                    <Menu size={32} />
                 </button>
             </div>
             {isOpen && (
