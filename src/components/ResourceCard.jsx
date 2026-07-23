@@ -2,7 +2,7 @@ import { FaTrash, FaCheck } from "react-icons/fa";
 import Deletebtn from "./Deletebtn";
 import Checkbtn from "./Checkbtn";
 
-function ResourceCard({ resource, onDelete, onCheck }) {
+function ResourceCard({ resource, onDelete, onCheck, deletingId }) {
     return (
         <div className=" m-1 w-full border border-primary rounded-lg shadow-lg hover:shadow-2xl transition-all duration-1000 ease-in-out ">
             <div className="relative group overflow-hidden rounded-t-lg">
