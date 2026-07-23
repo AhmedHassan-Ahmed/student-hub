@@ -80,9 +80,11 @@ function Resource() {
                 <AddResource onAdd={handleAdd} />
             </PageMainHeader>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 gap-5
+            md:grid-cols-2">
                 <div className="">
-                    <div className="grid grid-cols-5 lg:flex-row lg:items-start gap-3 pt-6">
+                    <div className="grid grid-cols-3 lg:flex-row lg:items-start gap-3 pt-6
+                    lg:grid-cols-4">
                         {topics.map((topic) => (
                             <Button
                                 key={topic}
