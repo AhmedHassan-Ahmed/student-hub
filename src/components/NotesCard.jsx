@@ -13,7 +13,7 @@ function NotesCard({
   return (
     <div
       onClick={() => setOpenMenu(null)}
-      className="pl-6 pr-6 mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      className="px-6 lg:py-[25px] lg:px-[63px] mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
     >
       {children}
 
