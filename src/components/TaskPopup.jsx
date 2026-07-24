@@ -39,7 +39,7 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                 duration: 0.25,
                 ease: "easeOut",
               }}
-              className="w-full max-w-lg rounded-xl bg-white shadow-2xl"
+              className="w-full max-w-lg rounded-xl bg-white shadow-2xl dark:bg-gray-900 dark:text-gray-100"
             >
               <form
                 onSubmit={handleSubmit}
@@ -53,7 +53,7 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                   <button
                     type="button"
                     onClick={close}
-                    className="text-2xl text-gray-500 transition hover:text-black"
+                    className="text-2xl text-gray-500 transition hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
                   >
                     x
                   </button>
@@ -66,12 +66,12 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                     name="title"
                     type="text"
                     placeholder=" "
-                    className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none"
+                    className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none dark:border-gray-700 dark:text-gray-100"
                   />
 
                   <label
                     htmlFor="title"
-                    className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+                    className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
               peer-placeholder-shown:top-3
               peer-placeholder-shown:text-base
               peer-focus:-top-2
@@ -91,12 +91,12 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                     name="description"
                     rows="5"
                     placeholder=" "
-                    className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none"
+                    className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 transition focus:border-blue-600 focus:outline-none dark:border-gray-700 dark:text-gray-100"
                   />
 
                   <label
                     htmlFor="description"
-                    className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+                    className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
               peer-placeholder-shown:top-3
               peer-placeholder-shown:text-base
               peer-focus:-top-2
@@ -115,12 +115,12 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                     id="dueDate"
                     name="dueDate"
                     type="date"
-                    className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10"
+                    className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                   />
 
                   <label
                     htmlFor="dueDate"
-                    className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600"
+                    className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600 dark:bg-gray-900 dark:text-blue-400"
                   >
                     Due Date
                   </label>
@@ -132,7 +132,7 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                     id="priority"
                     name="priority"
                     defaultValue=""
-                    className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10"
+                    className="w-full rounded-lg border border-gray-300 px-4 pt-6 pb-2 transition focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-600/10 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                   >
                     <option value="" disabled hidden></option>
                     <option>Low</option>
@@ -142,7 +142,7 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
 
                   <label
                     htmlFor="priority"
-                    className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600"
+                    className="absolute left-3 top-2 bg-white px-1 text-xs font-semibold text-blue-600 dark:bg-gray-900 dark:text-blue-400"
                   >
                     Priority
                   </label>
@@ -152,7 +152,7 @@ const TaskPopup = ({ open, close, isOpen, handleSubmit }) => {
                   <button
                     type="button"
                     onClick={close}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2 transition hover:bg-gray-100 sm:w-auto"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-2 transition hover:bg-gray-100 sm:w-auto dark:border-gray-700 dark:hover:bg-gray-800"
                   >
                     Cancel
                   </button>

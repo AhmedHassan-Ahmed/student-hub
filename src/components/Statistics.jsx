@@ -1,7 +1,7 @@
 import { statistics } from "../data/statistics";
 function Statistics() {
     return (
-        <section className="bg-[#052659] py-9">
+        <section className="bg-[#052659] py-9 dark:bg-blue-950">
             <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                 {statistics.map((item) => {
                 const Icon = item.icon;

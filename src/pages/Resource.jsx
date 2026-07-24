@@ -82,7 +82,7 @@ function Resource() {
                 <AddResource onAdd={handleAdd} />
             </PageMainHeader>
 
-            <div className="grid grid-cols-1 gap-5
+            <div className="ml-6 mr-6 grid grid-cols-1 gap-5
             md:grid-cols-2">
                 <div className="">
                     <div className="grid grid-cols-3 lg:flex-row lg:items-start gap-3 pt-6

@@ -1,6 +1,6 @@
 function ProfileHeader({ user }) {
     return (
-        <div className="w-full mt-4">
+        <div className="ml-6 mr-6 w-full mt-4">
 
             <div className="w-full h-32 bg-blue-400 rounded-sm shadow-sm
                 md:h-36 lg:h-40 relative flex justify-center md:justify-start md:px-6">

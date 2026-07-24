@@ -1,6 +1,6 @@
 function ContactSection({ user }) {
     return (
-        <div className="bg-white shadow-lg rounded-xl p-6 mt-6">
+        <div className="ml-6 mr-6 bg-white shadow-lg rounded-xl p-6 mt-6">
             <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
 
             <div className="space-y-2 text-gray-600 px-2">

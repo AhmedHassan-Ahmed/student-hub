@@ -99,7 +99,7 @@ const Notepage = () => {
             onClick={closeView}
           >
             <motion.div
-              className="w-full max-w-xl rounded-xl bg-white shadow-2xl"
+              className="w-full max-w-xl rounded-xl bg-white shadow-2xl dark:bg-gray-900 dark:text-gray-100"
               onClick={(e) => e.stopPropagation()}
               initial={{
                 opacity: 0,
@@ -128,13 +128,13 @@ const Notepage = () => {
 
                     <button
                       onClick={closeView}
-                      className="text-2xl text-gray-500 hover:text-black"
+                      className="text-2xl text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
                     >
                       x
                     </button>
                   </div>
 
-                  <p className="whitespace-pre-wrap leading-7 text-gray-700">
+                  <p className="whitespace-pre-wrap leading-7 text-gray-700 dark:text-gray-200">
                     {selectedNote.content}
                   </p>
 
@@ -142,7 +142,7 @@ const Notepage = () => {
                     {selectedNote.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700"
+                        className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700 dark:bg-blue-950 dark:text-blue-400"
                       >
                         #{tag}
                       </span>
