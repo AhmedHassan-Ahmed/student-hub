@@ -1,6 +1,7 @@
 import { FaTrash, FaCheck } from "react-icons/fa";
 import Deletebtn from "./Deletebtn";
 import Checkbtn from "./Checkbtn";
+import Button from "./Button";
 
 function ResourceCard({ resource, onDelete, onCheck, deletingId }) {
     return (
@@ -31,14 +32,16 @@ function ResourceCard({ resource, onDelete, onCheck, deletingId }) {
             <p className="py-2 px-4 text-gray-500">
                 {resource.description}</p>
 
-            <div>
-                <button className="bg-blue-500 px-32 py-1 m-5 rounded-lg text-white cursor-pointer
-                hover:bg-blue-600 transition-all duration-1000 ease-in-out ">
-                    <a href={resource.link} target="_blank">Explore Now</a>
-                </button>
+            <div className="px-4 pb-4">
+                <Button
+                    className="w-full md:w-full rounded-lg"
+                    onclick={() => window.open(resource.link, "_blank")}
+                >
+                    Explore Now
+                </Button>
             </div>
 
-        </div>
+        </div >
     )
 }
 

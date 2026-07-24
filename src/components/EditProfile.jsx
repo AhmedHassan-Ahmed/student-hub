@@ -8,6 +8,8 @@ const EditProfile = ({ user, onSave }) => {
     const open = () => dialogRef.current.showModal();
     const close = () => dialogRef.current.close();
 
+    const [errors, setErrors] = useState({});
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
@@ -26,13 +28,41 @@ const EditProfile = ({ user, onSave }) => {
         e.preventDefault();
         const formData = new FormData(e.target);
 
+        const name = formData.get("name")?.trim();
+        const email = formData.get("email")?.trim();
+        const phone = formData.get("phone")?.trim();
+        const bio = formData.get("bio")?.trim();
+
+
+
+        let newErrors = {};
+
+        if (!name) newErrors.name = "Name is required";
+
+        if (!email) newErrors.email = "Email is required";
+        else if (!email.includes("@"))
+            newErrors.email = "Invalid email";
+
+        if (phone && phone.length < 10)
+            newErrors.phone = "Invalid phone";
+
+        if (bio && bio.length < 10)
+            newErrors.bio = "Bio too short";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setErrors({});
+
         const updatedUser = {
-            name: formData.get("name"),
+            name,
             title: formData.get("title"),
-            bio: formData.get("bio"),
-            image: preview, // 
-            email: formData.get("email"),
-            phone: formData.get("phone"),
+            bio,
+            image: preview,
+            email,
+            phone,
             location: formData.get("location"),
             techSkills: formData.get("techSkills").split(","),
             softSkills: formData.get("softSkills").split(","),
@@ -41,10 +71,9 @@ const EditProfile = ({ user, onSave }) => {
         onSave(updatedUser);
         close();
         e.target.reset();
-
     };
 
-    const InputField = ({ id, name, label, defaultValue }) => (
+    const InputField = ({ id, name, label, defaultValue, error }) => (
         <div className="relative">
             <input
                 id={id}
@@ -68,6 +97,11 @@ const EditProfile = ({ user, onSave }) => {
             >
                 {label}
             </label>
+            {error && (
+                <p className="text-red-500 text-xs mt-1">
+                    {error}
+                </p>
+            )}
         </div>
     );
 
@@ -104,8 +138,8 @@ const EditProfile = ({ user, onSave }) => {
                     <div className="space-y-4">
                         <h3 className="font-semibold text-gray-700">Personal Info</h3>
 
-                        <InputField id="name" name="name" label="Full Name" defaultValue={user.name} />
-                        <InputField id="title" name="title" label="Job Title" defaultValue={user.title} />
+                        <InputField id="name" name="name" label="Full Name" defaultValue={user.name} error={errors.name} />
+                        <InputField id="title" name="title" label="Job Title" defaultValue={user.title} error={errors.title} />
 
                         <div className="relative">
                             <textarea
@@ -126,15 +160,20 @@ const EditProfile = ({ user, onSave }) => {
                                     peer-[:not(:placeholder-shown)]:text-[11px]">
                                 Bio
                             </label>
+                            {errors.bio && (
+                                <p className="text-red-500 text-xs mt-1">
+                                    {errors.bio}
+                                </p>
+                            )}
                         </div>
                     </div>
 
                     <div className="space-y-4">
                         <h3 className="font-semibold text-gray-700">Contact Info</h3>
 
-                        <InputField id="email" name="email" label="Email" defaultValue={user.email} />
-                        <InputField id="phone" name="phone" label="Phone" defaultValue={user.phone} />
-                        <InputField id="location" name="location" label="Location" defaultValue={user.location} />
+                        <InputField id="email" name="email" label="Email" defaultValue={user.email} error={errors.email} />
+                        <InputField id="phone" name="phone" label="Phone" defaultValue={user.phone} error={errors.phone} />
+                        <InputField id="location" name="location" label="Location" defaultValue={user.location} error={errors.location} />
                     </div>
 
                     <div className="space-y-4">
