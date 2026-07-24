@@ -16,7 +16,9 @@ const Layout = () => {
         }}
         className="mx-auto max-w-[130PX]/10 "
       >
-        <Outlet />
+        
+          <Outlet />
+      
       </main>
     </>
   );
