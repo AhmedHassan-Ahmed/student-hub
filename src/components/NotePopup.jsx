@@ -6,13 +6,13 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
     <>
       <button
         onClick={open}
-        className="focus:outline-0 flex h-64 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 transition hover:border-blue-500 hover:bg-blue-50 sm:h-96 lg:h-96"
+        className="focus:outline-0 flex h-64 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 transition hover:border-blue-500 hover:bg-blue-50 sm:h-96 lg:h-96 dark:border-gray-700 dark:bg-gray-950 dark:hover:bg-blue-950"
       >
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow">
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow dark:bg-gray-900">
           <span className="text-2xl text-blue-600">+</span>
         </div>
 
-        <p className="text-center text-base font-semibold text-gray-600 sm:text-lg">
+        <p className="text-center text-base font-semibold text-gray-600 sm:text-lg dark:text-gray-300">
           Add New Study Note
         </p>
       </button>
@@ -47,7 +47,7 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                 duration: 0.25,
                 ease: "easeOut",
               }}
-              className="w-full max-w-lg rounded-xl bg-white shadow-2xl"
+              className="w-full max-w-lg rounded-xl bg-white shadow-2xl dark:bg-gray-900 dark:text-gray-100"
             >
               <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-6">
                 <h2 className="mb-6 text-xl font-bold sm:text-2xl">
@@ -62,12 +62,12 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                       id="title"
                       name="title"
                       placeholder=" "
-                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0"
+                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
                     />
 
                     <label
                       htmlFor="title"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
                       peer-placeholder-shown:top-3
                       peer-placeholder-shown:text-base
                       peer-focus:-top-2
@@ -87,12 +87,12 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                       name="content"
                       rows="7"
                       placeholder=" "
-                      className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0"
+                      className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
                     />
 
                     <label
                       htmlFor="content"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
                       peer-placeholder-shown:top-3
                       peer-placeholder-shown:text-base
                       peer-focus:-top-2
@@ -111,12 +111,12 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                       id="tags"
                       name="tags"
                       placeholder=" "
-                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0"
+                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
                     />
 
                     <label
                       htmlFor="tags"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all
+                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
                       peer-placeholder-shown:top-3
                       peer-placeholder-shown:text-base
                       peer-focus:-top-2
@@ -133,7 +133,7 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                     <button
                       type="button"
                       onClick={close}
-                      className="w-full rounded-lg border px-4 py-2 hover:bg-gray-100 sm:w-auto"
+                      className="w-full rounded-lg border px-4 py-2 hover:bg-gray-100 sm:w-auto dark:border-gray-700 dark:hover:bg-gray-800"
                     >
                       Cancel
                     </button>

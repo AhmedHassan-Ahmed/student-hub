@@ -13,7 +13,7 @@ function NotesCard({
   return (
     <div
       onClick={() => setOpenMenu(null)}
-      className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      className="pl-6 pr-6 mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
     >
       {children}
 
@@ -39,7 +39,7 @@ function NotesCard({
             duration: 0.3,
             ease: "easeInOut",
           }}
-          className="flex h-96 flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-lg"
+          className="flex h-96 flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-lg dark:border-gray-700 dark:bg-gray-900"
         >
           {note.image && (
             <img
@@ -51,7 +51,7 @@ function NotesCard({
 
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="line-clamp-3 font-serif text-3xl pt-3 font-bold text-gray-900">
+              <h2 className="line-clamp-3 font-serif text-3xl pt-3 font-bold text-gray-900 dark:text-gray-100">
                 {note.title}
               </h2>
             </div>
@@ -62,7 +62,7 @@ function NotesCard({
                   setOpenMenu(openMenu === note.id ? null : note.id);
                   e.stopPropagation();
                 }}
-                className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
               >
                 <FaEllipsisV />
               </button>
@@ -70,14 +70,14 @@ function NotesCard({
               {openMenu === note.id && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-lg border bg-white shadow-lg"
+                  className="absolute right-0 z-20 mt-2 w-36 overflow-hidden rounded-lg border bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900"
                 >
                   <button
                     onClick={() => {
                       handleView(note);
                       setOpenMenu(null);
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-3 text-left hover:bg-gray-100"
+                    className="flex w-full items-center gap-2 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
                   >
                     <FaEye />
                     View
@@ -98,20 +98,22 @@ function NotesCard({
             </div>
           </div>
 
-          <p className="mt-4 line-clamp-5 text-gray-600">{note.content}</p>
+          <p className="mt-4 line-clamp-5 text-gray-600 dark:text-gray-300">
+            {note.content}
+          </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
             {note.tags.map((tag, index) => (
               <span
                 key={`${tag}-${index}`}
-                className="rounded bg-gray-100 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-gray-600"
+                className="rounded bg-gray-100 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-gray-600 dark:bg-gray-800 dark:text-gray-300"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="mt-auto flex items-center justify-between border-t pt-4 text-sm text-gray-500">
+          <div className="mt-auto flex items-center justify-between border-t pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
             <span>{note.date}</span>
           </div>
         </motion.div>

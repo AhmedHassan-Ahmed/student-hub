@@ -74,11 +74,11 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
   return (
     <div
-      className="space-y-8 p-4 sm:p-6 lg:p-8"
+      className="space-y-8 p-4 sm:p-6 lg:p-8 "
       onClick={() => setOpenMenu(null)}
     >
       <div className="grid gap-5 lg:grid-cols-4">
-        <div className="rounded-xl border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3">
+        <div className="rounded-xl border bg-white p-4 shadow-sm sm:p-6 lg:col-span-3 dark:border-gray-700 dark:bg-gray-900">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
@@ -86,7 +86,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
               </p>
 
               <select
-                className="focus:outline-0 w-full rounded border p-3"
+                className="focus:outline-0 w-full rounded border p-3 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
@@ -102,7 +102,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
               </p>
 
               <select
-                className="focus:outline-0 w-full rounded border p-3"
+                className="focus:outline-0 w-full rounded border p-3 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 value={priorityFilter}
                 onChange={(e) => setPriorityFilter(e.target.value)}
               >
@@ -119,7 +119,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
               </p>
 
               <select
-                className="focus:outline-0 w-full rounded border p-3"
+                className="focus:outline-0 w-full rounded border p-3 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 value={dayFilter}
                 onChange={(e) => setDayFilter(e.target.value)}
               >
@@ -157,10 +157,10 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
           </p>
         </div>
       </div>
-      <div className="overflow-x-auto rounded-xl border-0  bg-white shadow-sm">
-        <div className="pb-8 hidden md:block overflow-x-auto rounded-2xl border-0  border-gray-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-xl border-0  bg-white shadow-sm dark:bg-gray-900">
+        <div className="pb-8 hidden md:block overflow-x-auto rounded-2xl border-0  border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900">
           <table className="min-w-[850px] w-full">
-            <thead className="border-b border-gray-200 bg-gray-50 text-left text-xs uppercase tracking-widest text-gray-500">
+            <thead className="border-b border-gray-200 bg-gray-50 text-left text-xs uppercase tracking-widest text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
               <tr>
                 <th className="px-6 py-4">Title & Description</th>
                 <th className="px-4 py-4">Priority</th>
@@ -188,8 +188,8 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                     <Fragment key={task.id}>
                       {showDate && (
                         <tr key={`date-${task.dueDate}`}>
-                          <td colSpan={5} className="bg-gray-50 px-6 py-3">
-                            <h2 className="font-semibold text-gray-700">
+                          <td colSpan={5} className="bg-gray-50 px-6 py-3 dark:bg-gray-800">
+                            <h2 className="font-semibold text-gray-700 dark:text-gray-200">
                               {getDateLabel(task.dueDate)}
                             </h2>
                           </td>
@@ -206,7 +206,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                             : { opacity: 1, x: 0 }
                         }
                         transition={{ duration: 0.3 }}
-                        className="border-b border-gray-100 hover:bg-gray-50"
+                        className="border-b border-gray-100 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800"
                       >
                         <td className="px-6 py-5">
                           <div className="flex gap-4">
@@ -222,7 +222,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                               <h3
                                 className={`font-semibold ${task.completed
                                     ? "line-through text-gray-400"
-                                    : "text-gray-900"
+                                    : "text-gray-900 dark:text-gray-100"
                                   }`}
                               >
                                 {task.title}
@@ -253,12 +253,12 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                           </div>
                         </td>
 
-                        <td className="px-4 text-gray-600">{task.dueDate}</td>
+                        <td className="px-4 text-gray-600 dark:text-gray-300">{task.dueDate}</td>
 
                         <td className="px-4 text-center">
                           <div className="relative inline-block">
                             <button
-                              className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                              className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                               onClick={(e) => {
                                 setOpenMenu(
                                   openMenu === task.id ? null : task.id,
@@ -270,7 +270,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                             </button>
 
                             {openMenu === task.id && (
-                              <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
+                              <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
                                 <button
                                   onClick={() => {
                                     deleteTask(task.id);
@@ -296,7 +296,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
         <div className="space-y-4 md:hidden">
           {filteredTasks.length === 0 ? (
-            <div className="rounded-2xl border-0  border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
+            <div className="rounded-2xl border-0  border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400">
               No tasks found.
             </div>
           ) : (
@@ -309,7 +309,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
               return (
                 <div key={task.id}>
                   {showDate && (
-                    <h2 className="mb-3 mt-6 border-b pb-2 text-lg font-bold text-gray-700">
+                    <h2 className="mb-3 mt-6 border-b pb-2 text-lg font-bold text-gray-700 dark:border-gray-700 dark:text-gray-200">
                       {getDateLabel(task.dueDate)}
                     </h2>
                   )}
@@ -332,7 +332,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                         }
                     }
                     transition={{ duration: 0.3 }}
-                    className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md"
+                    className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex gap-3">
@@ -348,7 +348,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                           <h3
                             className={`font-semibold ${task.completed
                                 ? "line-through text-gray-400"
-                                : "text-gray-900"
+                                : "text-gray-900 dark:text-gray-100"
                               }`}
                           >
                             {task.title}
@@ -362,7 +362,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
 
                       <div className="relative">
                         <button
-                          className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                          className="rounded p-2 text-gray-500 transition hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                           onClick={(e) => {
                             setOpenMenu(openMenu === task.id ? null : task.id);
                             e.stopPropagation();
@@ -372,7 +372,7 @@ export default function TaskTable({ deletingId, tasksupdate, deleteTask }) {
                         </button>
 
                         {openMenu === task.id && (
-                          <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg">
+                          <div className="absolute right-0 z-10 mt-2 w-36 rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
                             <button
                               onClick={() => {
                                 deleteTask(task.id);

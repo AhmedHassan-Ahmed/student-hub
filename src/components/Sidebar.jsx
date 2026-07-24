@@ -3,14 +3,14 @@ import { X } from "lucide-react";
 function DashboardSidebar({isOpen, setIsOpen}) {
     return (
         <aside className={`
-            h-screen w-64 bg-[#0C1225] p-6 fixed top-0 left-0 z-50
+            hidden md:block h-[calc(100vh-4rem)] w-64 bg-white text-gray-900 p-6 fixed top-16 left-0 z-40 shadow-lg
             transform transition-transform duration-300
             ${isOpen ? "translate-x-0" : "-translate-x-full"}
-            md:static md:translate-x-0
+            dark:bg-gray-950 dark:text-gray-100
             `}>
                 <button
                 onClick={() => setIsOpen(false)}
-                className="md:hidden mb-6">
+                className="mb-6">
                     <X size={30} />
                 </button>
             <h1 className="text-2xl font-bold text-blue-400">

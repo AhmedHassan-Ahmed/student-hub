@@ -1,6 +1,6 @@
 function SkillsSection({ user }) {
     return (
-        <div className="bg-white shadow-lg rounded-xl p-6 mt-6">
+        <div className="ml-6 mr-6 bg-white shadow-lg rounded-xl p-6 mt-6">
             <h3 className="text-xl font-semibold mb-4">Skills</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

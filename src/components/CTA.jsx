@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CTA() {
     return (
-        <section id="start" className="bg-[#052659] py-20 px-6 text-center">
+        <section id="start" className="bg-[#052659] py-20 px-6 text-center dark:bg-blue-950">
             <h2 className="text-4xl font-bold text-white">
                 Ready to Boost Your Productivity?
             </h2>

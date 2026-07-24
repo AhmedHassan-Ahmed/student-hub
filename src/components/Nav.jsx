@@ -6,7 +6,9 @@ import {
   FaStickyNote,
   FaUserCircle,
   FaEllipsisV,
+  FaTachometerAlt,
 } from "react-icons/fa";
+import ThemeButton from "./ThemeButton";
 
 const Navbar = ({ open, setOpen }) => {
   const linkClass = ({ isActive }) =>
@@ -31,12 +33,20 @@ const Navbar = ({ open, setOpen }) => {
           Student-Hub
         </NavLink>
 
+        <div className="flex items-center gap-2">
+          <ThemeButton />
+        </div>
+
         <div className="hidden items-center gap-2 md:flex">
           <NavLink to="/" className={linkClass} end>
             <FaHome />
             Home
           </NavLink>
 
+          <NavLink to="/dashboard" className={linkClass}>
+            <FaTachometerAlt />
+            Dashboard
+          </NavLink>
           <NavLink to="/resource" className={linkClass}>
             <FaBook />
             Resources
@@ -56,11 +66,20 @@ const Navbar = ({ open, setOpen }) => {
             <FaUserCircle />
             Profile
           </NavLink>
+          <button
+            onClick={(e) => {
+              setOpen((open) => !open);
+              e.stopPropagation();
+            }}
+            className="hidden rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:block dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            <FaEllipsisV />
+          </button>
         </div>
 
         <button
           onClick={(e) => {
-            setOpen(!open);
+            setOpen((old) => !old);
             e.stopPropagation();
           }}
           className="rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:hidden"
@@ -83,6 +102,14 @@ const Navbar = ({ open, setOpen }) => {
             >
               <FaHome />
               Home
+            </NavLink>
+            <NavLink
+              to="/dashboard"
+              onClick={() => setOpen(false)}
+              className={linkClass}
+            >
+              <FaTachometerAlt />
+              Dashboard
             </NavLink>
 
             <NavLink

@@ -1,9 +1,9 @@
 function Footer() {
     return (
-        <footer id="contacts" className="bg-[#0C1225] py-16 px-6">
+        <footer id="contacts" className="bg-white py-16 px-6 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
             <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-2 lg:grid-cols-5">
                 <div>
-                    <h3 className="text-white font-bold mb-4">
+                    <h3 className="text-gray-900 font-bold mb-4 dark:text-white">
                         Student Hub
                     </h3>
                     <p className="text-gray-400 leading-7">
@@ -26,7 +26,7 @@ function Footer() {
                     </div>
                 </div>
                 <div>
-                    <h4 className="text-white font-semibold mb-4">
+                    <h4 className="text-gray-900 font-semibold mb-4 dark:text-white">
                         Quick Links
                     </h4>
                     <ul className="space-y-2 text-gray-400">
@@ -38,7 +38,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div>
-                    <h4 className="text-white font-semibold mb-4">
+                    <h4 className="text-gray-900 font-semibold mb-4 dark:text-white">
                         Resources
                     </h4>
                     <ul className="space-y-2 text-gray-400">
@@ -49,7 +49,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div>
-                    <h4 className="text-white font-semibold mb-4">
+                    <h4 className="text-gray-900 font-semibold mb-4 dark:text-white">
                         Contact
                     </h4>
                     <ul className="space-y-2 text-gray-400">
@@ -59,7 +59,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div>
-                    <h4 className="text-white font-semibold mb-4">
+                    <h4 className="text-gray-900 font-semibold mb-4 dark:text-white">
                         Newsletter
                     </h4>
                     <input 

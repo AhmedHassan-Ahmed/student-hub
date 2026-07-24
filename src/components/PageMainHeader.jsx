@@ -6,9 +6,9 @@ const PageMainHeader = ({
   children,
 }) => {
   return (
-    <div className="border-b border-gray-200 bg-white px-7 md:px-8 py-5">
-      <div className="flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">
-        <a href="#" className="hover:text-gray-700">
+    <div className="border-b border-gray-200 bg-white px-7 md:px-8 py-5 dark:border-gray-800 dark:bg-gray-950">
+      <div className="flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        <a href="#" className="hover:text-gray-700 dark:hover:text-gray-200">
           {breadcrumb}
         </a>
 
@@ -21,11 +21,11 @@ const PageMainHeader = ({
 
       <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="font-serif text-5xl font-bold text-gray-900">
+          <h1 className="font-serif text-5xl font-bold text-gray-900 dark:text-gray-100">
             {title}
           </h1>
 
-          <p className="mt-2 text-lg text-gray-600">{description}</p>
+          <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
         <div className="flex items-center gap-3">{children}</div>

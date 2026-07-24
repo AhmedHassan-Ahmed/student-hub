@@ -1,20 +1,20 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
+import DashboardSidebar from "../components/Sidebar";
 import { useState } from "react";
 
 const Layout = () => {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
   return (
     <>
-    {location.pathname !== "/dashboard" && (
       <Nav open={open} setOpen={setOpen} />
-      )}
+      <DashboardSidebar isOpen={open} setIsOpen={setOpen} />
+
       <main
         onClick={() => {
-          setOpen(open ? false : false);
+          setOpen(false);
         }}
-        className="mx-auto max-w-[130PX]/10 p-6"
+        className="mx-auto max-w-[130PX]/10 "
       >
         <Outlet />
       </main>

@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html.dark {
+    color-scheme: dark;
+    background-color: var(--color-gray-950);
+  }
+
+  html.dark body {
+    background-color: var(--color-gray-950);
+    color: var(--color-gray-100);
+  }
+
+  html.dark dialog {
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-100);
+  }
+}
+
+@layer utilities {
+  .dark .bg-white { @apply bg-gray-900; }
+  .dark .bg-white\/90 { @apply bg-gray-900; }
+  .dark .bg-gray-50 { @apply bg-gray-950; }
+  .dark .bg-gray-100 { @apply bg-gray-800; }
+  .dark .bg-blue-50 { @apply bg-blue-950; }
+  .dark .bg-blue-100 { @apply bg-blue-950; }
+  .dark .bg-green-100 { @apply bg-green-950; }
+  .dark .bg-red-50 { @apply bg-red-950; }
+  .dark .text-black { @apply text-gray-100; }
+  .dark .text-gray-900, .dark .text-gray-800, .dark .text-gray-700 { @apply text-gray-100; }
+  .dark .text-gray-600 { @apply text-gray-300; }
+  .dark .text-gray-500, .dark .text-gray-400 { @apply text-gray-400; }
+  .dark .border-gray-100, .dark .border-gray-200, .dark .border-gray-300 { @apply border-gray-700; }
+  .dark .border-gray-400 { @apply border-gray-600; }
+  .dark .hover\:bg-gray-50:hover, .dark .hover\:bg-gray-100:hover { @apply bg-gray-800; }
+  .dark .hover\:text-black:hover, .dark .hover\:text-gray-700:hover { @apply text-gray-100; }
+  .dark input, .dark textarea, .dark select { @apply border-gray-700 bg-gray-900 text-gray-100 placeholder:text-gray-500; }
+  .dark option { @apply bg-gray-900 text-gray-100; }
+}
