@@ -82,10 +82,10 @@ function Resource() {
                 <AddResource onAdd={handleAdd} />
             </PageMainHeader>
 
-            <div className="ml-6 mr-6 grid grid-cols-1 gap-5
+            <div className="md:px-6 lg:py-[25px] lg:px-[60px] px-8 grid grid-cols-1 gap-5
             md:grid-cols-2">
                 <div className="">
-                    <div className="grid grid-cols-3 lg:flex-row lg:items-start gap-3 pt-6
+                    <div className="grid grid-cols-3 lg:flex-row lg:items-start gap-3 pt-3
                     lg:grid-cols-4">
                         {topics.map((topic) => (
                             <Button
@@ -109,7 +109,7 @@ function Resource() {
             </div>
 
             {resources.length > 0 ? (
-                <div className="grid grid-cols-1 gap-5 pt-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="lg:py-[25px] lg:px-[60px] grid grid-cols-1 gap-5 pt-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {filteredResources.map((res) => (
                         <ResourceCard
                             key={res.id}

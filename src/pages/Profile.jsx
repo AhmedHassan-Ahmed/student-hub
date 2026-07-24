@@ -50,12 +50,14 @@ function Profile() {
 
             <ProfileHeader user={user} />
 
-            <BioSection user={user} />
+            <div className="lg:px-8">
+                <BioSection user={user} />
 
-            <ContactSection user={user} />
+                <ContactSection user={user} />
 
-            <SkillsSection user={user} />
+                <SkillsSection user={user} />
 
+            </div>
             <PagesFooter />
         </div>
     );

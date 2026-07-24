@@ -5,43 +5,38 @@ import Button from "./Button";
 
 function ResourceCard({ resource, onDelete, onCheck, deletingId }) {
     return (
-        <div className="m-1 w-full border border-primary rounded-lg shadow-lg hover:shadow-2xl transition-all duration-1000 ease-in-out ">
-            <div className="relative group overflow-hidden rounded-t-lg">
+        <div className="bg-white mx-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 flex flex-col md:mx-7 lg:mx-0">
 
-                <img src={resource.image} alt={resource.title}
-                    className={`rounded-t-lg w-full h-60 object-cover transition-all duration-1000 ease-in-out scale-110
-                      group-hover:opacity-30 group-hover:scale-100
-                      ${resource.done ? "scale-100 opacity-30" : "scale-110"}`} />
+            <div className="relative">
+                <img
+                    src={resource.image}
+                    alt={resource.title}
+                    className="w-full h-52 object-cover rounded-t-lg"
+                />
 
-                <div className={`absolute top-0 left-0 w-full flex items-center justify-center h-60 transition-all duration-1000 opacity-0
-                   group-hover:bg-gray-300 
-                   ${resource.done ? "opacity-80 bg-gray-300" : "opacity-0 group-hover:opacity-80 group-hover:bg-gray-300"}`}>
-                    <h2 className="font-headers text-xl text-primary text-center font-bold">
-                        {resource.title}</h2>
+                <div className="absolute top-2 right-2 flex gap-2">
+                    <Checkbtn onCheck={() => onCheck(resource.id)} isDone={resource.done} />
                 </div>
+            </div>
 
-                <div className={`flex text-black absolute top-0 right-0 m-3 gap-3 rounded-full transition-all duration-500
-                    ${resource.done ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+            <div className="p-4 flex flex-col flex-grow">
+                <h2 className="font-bold text-lg mb-2">{resource.title}</h2>
+
+                <p className="text-gray-500 text-sm flex-grow">
+                    {resource.description}
+                </p>
+                <div className="flex items-center gap-2 mt-4 md:justify-between">
+                    <Button
+                        className="mt-4 w-full rounded-lg md:w-full"
+                        onclick={() => window.open(resource.link, "_blank")}
+                    >
+                        Explore
+                    </Button>
                     <Deletebtn onDelete={() => onDelete(resource.id)} />
-                    <Checkbtn onCheck={() => onCheck(resource.id)}
-                        isDone={resource.done} />
+
                 </div>
-
             </div>
-
-            <p className="py-2 px-4 text-gray-500">
-                {resource.description}</p>
-
-            <div className="px-4 pb-4">
-                <Button
-                    className="w-full md:w-full rounded-lg"
-                    onclick={() => window.open(resource.link, "_blank")}
-                >
-                    Explore Now
-                </Button>
-            </div>
-
-        </div >
+        </div>
     )
 }
 

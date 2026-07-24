@@ -7,8 +7,8 @@ function Deletebtn({ onDelete }) {
         <>
             <FaTrash
                 onClick={() => setShowConfirm(true)}
-                className="cursor-pointer border rounded-full text-3xl p-2 transition-all duration-1000 ease-in-out
-                            hover:bg-red-800 hover:border-red-800 hover:text-white" />
+                className="cursor-pointer text-4xl p-2 rounded-md border transition duration-500
+                 hover:bg-red-600 hover:text-white mt-4" />
             {showConfirm && (
                 <div className="fixed inset-0 z-50 bg-black/70 flex justify-center items-center">
                     <div className="border border-primary p-6 rounded-lg bg-white text-center shadow-lg animate-in fade-in zoom-in">
