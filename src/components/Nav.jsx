@@ -34,9 +34,7 @@ const Navbar = ({ open, setOpen }) => {
         </NavLink>
 
         <div className="hidden items-center gap-2 md:flex">
-          <div className="flex items-center gap-2">
-            <ThemeButton />
-          </div>
+          <ThemeButton />
 
           <NavLink to="/" className={linkClass} end>
             <FaHome />
@@ -77,15 +75,18 @@ const Navbar = ({ open, setOpen }) => {
           </button>
         </div>
 
-        <button
-          onClick={(e) => {
-            setOpen((old) => !old);
-            e.stopPropagation();
-          }}
-          className="rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:hidden"
-        >
-          <FaEllipsisV />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+            <ThemeButton />
+            <button
+              onClick={(e) => {
+                setOpen((old) => !old);
+                e.stopPropagation();
+              }}
+              className="rounded-md p-2 text-xl text-gray-700 hover:bg-gray-100 md:hidden"
+            >
+              <FaEllipsisV />
+            </button>
+        </div>
       </div>
 
       {open && (
