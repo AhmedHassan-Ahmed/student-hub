@@ -1,7 +1,53 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 function NotePopup({ handlesubmit, isOpen, open, close }) {
-  
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const title = formData.get("title")?.trim();
+    const content = formData.get("content")?.trim();
+    const tags = formData.get("tags")?.trim();
+
+    const newErrors = {};
+
+    if (!title) {
+      newErrors.title = "Title is required";
+    } else if (title.length < 3) {
+      newErrors.title = "Title must be at least 3 characters";
+    }
+
+    if (!content) {
+      newErrors.content = "Note content is required";
+    } else if (content.length < 5) {
+      newErrors.content = "Content must be at least 5 characters";
+    }
+
+    if (tags) {
+      const tagsArray = tags
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean);
+
+      if (tagsArray.some((tag) => tag.length < 2)) {
+        newErrors.tags = "Each tag must be at least 2 characters";
+      }
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+
+    handlesubmit(e);
+  };
+
   return (
     <>
       <button
@@ -54,79 +100,113 @@ function NotePopup({ handlesubmit, isOpen, open, close }) {
                   Add Study Note
                 </h2>
 
-                <form onSubmit={handlesubmit}>
-                  <div className="relative mb-5">
-                    <input
-                    required
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder=" "
-                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
-                    />
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-5">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder=" "
+                        className={`peer w-full rounded-lg border bg-transparent px-4 py-3 focus:outline-0 dark:text-gray-100 ${
+                          errors.title
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-gray-300 focus:border-blue-600 dark:border-gray-700"
+                        }`}
+                      />
 
-                    <label
-                      htmlFor="title"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
-                      peer-placeholder-shown:top-3
-                      peer-placeholder-shown:text-base
-                      peer-focus:-top-2
-                      peer-focus:text-xs
-                      peer-focus:text-blue-600
-                      peer-not-placeholder-shown:-top-2
-                      peer-not-placeholder-shown:text-xs"
-                    >
-                      Title
-                    </label>
+                      <label
+                        htmlFor="title"
+                        className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
+                        peer-placeholder-shown:top-3
+                        peer-placeholder-shown:text-base
+                        peer-focus:-top-2
+                        peer-focus:text-xs
+                        peer-focus:text-blue-600
+                        peer-not-placeholder-shown:-top-2
+                        peer-not-placeholder-shown:text-xs"
+                      >
+                        Title
+                      </label>
+                    </div>
+
+                    {errors.title && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.title}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="relative mb-5">
-                    <textarea
-                    required
-                      id="content"
-                      name="content"
-                      rows="7"
-                      placeholder=" "
-                      className="peer w-full resize-none rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
-                    />
+                  <div className="mb-5">
+                    <div className="relative">
+                      <textarea
+                        id="content"
+                        name="content"
+                        rows="7"
+                        placeholder=" "
+                        className={`peer w-full resize-none rounded-lg border bg-transparent px-4 py-3 focus:outline-0 dark:text-gray-100 ${
+                          errors.content
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-gray-300 focus:border-blue-600 dark:border-gray-700"
+                        }`}
+                      />
 
-                    <label
-                      htmlFor="content"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
-                      peer-placeholder-shown:top-3
-                      peer-placeholder-shown:text-base
-                      peer-focus:-top-2
-                      peer-focus:text-xs
-                      peer-focus:text-blue-600
-                      peer-not-placeholder-shown:-top-2
-                      peer-not-placeholder-shown:text-xs"
-                    >
-                      Note Content
-                    </label>
+                      <label
+                        htmlFor="content"
+                        className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
+                        peer-placeholder-shown:top-3
+                        peer-placeholder-shown:text-base
+                        peer-focus:-top-2
+                        peer-focus:text-xs
+                        peer-focus:text-blue-600
+                        peer-not-placeholder-shown:-top-2
+                        peer-not-placeholder-shown:text-xs"
+                      >
+                        Note Content
+                      </label>
+                    </div>
+
+                    {errors.content && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.content}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="relative mb-6">
-                    <input
-                      type="text"
-                      id="tags"
-                      name="tags"
-                      placeholder=" "
-                      className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 focus:border-blue-600 focus:outline-0 dark:border-gray-700 dark:text-gray-100"
-                    />
+                  <div className="mb-6">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="tags"
+                        name="tags"
+                        placeholder=" "
+                        className={`peer w-full rounded-lg border bg-transparent px-4 py-3 focus:outline-0 dark:text-gray-100 ${
+                          errors.tags
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-gray-300 focus:border-blue-600 dark:border-gray-700"
+                        }`}
+                      />
 
-                    <label
-                      htmlFor="tags"
-                      className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
-                      peer-placeholder-shown:top-3
-                      peer-placeholder-shown:text-base
-                      peer-focus:-top-2
-                      peer-focus:text-xs
-                      peer-focus:text-blue-600
-                      peer-not-placeholder-shown:-top-2
-                      peer-not-placeholder-shown:text-xs"
-                    >
-                      Tags (comma separated)
-                    </label>
+                      <label
+                        htmlFor="tags"
+                        className="absolute left-4 top-3 bg-white px-1 text-gray-500 transition-all dark:bg-gray-900 dark:text-gray-400
+                        peer-placeholder-shown:top-3
+                        peer-placeholder-shown:text-base
+                        peer-focus:-top-2
+                        peer-focus:text-xs
+                        peer-focus:text-blue-600
+                        peer-not-placeholder-shown:-top-2
+                        peer-not-placeholder-shown:text-xs"
+                      >
+                        Tags (comma separated)
+                      </label>
+                    </div>
+
+                    {errors.tags && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.tags}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
