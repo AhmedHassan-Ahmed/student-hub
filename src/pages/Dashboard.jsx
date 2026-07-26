@@ -5,7 +5,8 @@ import {
   Clock3,
   TrendingUp,
 } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import avatar from "../assets/images/avatar.png";
+import { useEffect, useState } from "react";
 import quotes from "../data/quotes";
 import PagesFooter from "../components/PagesFooter";
 function Dashboard() {
@@ -16,7 +17,11 @@ function Dashboard() {
       setUser(savedUser);
     }
   }, []);
-  const tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+    setTasks(storedTasks);
+  }, []);
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
   const pendingTasks = tasks.filter((task) => !task.completed).length;
@@ -54,7 +59,7 @@ function Dashboard() {
               </p>
             </div>
             <img
-              src={user?.image || "https://placehold.co/60x60"}
+              src={user?.image || avatar}
               alt="profile"
               className="hidden md:block w-14 h-14 rounded-full object-cover border-2 border-blue-500"
             ></img>
