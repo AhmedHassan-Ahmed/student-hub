@@ -5,7 +5,7 @@ import {
   Clock3,
   TrendingUp,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import quotes from "../data/quotes";
 import PagesFooter from "../components/PagesFooter";
 function Dashboard() {
@@ -27,7 +27,9 @@ function Dashboard() {
     .filter((task) => !task.completed && task.dueDate)
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     .slice(0, 3);
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const [randomQuote] = useState(() => {
+    return quotes[Math.floor(Math.random() * quotes.length)];
+  });
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     day: "numeric",
